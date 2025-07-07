@@ -1294,17 +1294,6 @@ st.markdown("""
     filter: blur(0.5px) brightness(1.2);
     animation-duration: 18s;
 }
-
-/* Add this CSS to override the default Streamlit sidebar collapsed bar (which is .st-emotion-cache-18ni7ap or .st-emotion-cache-1avcm0n, but best to use [data-testid="collapsedControl"] for future-proofing) */
-[data-testid="collapsedControl"] {
-    background: rgba(255,255,255,0.03) !important;
-    box-shadow: none !important;
-    border: none !important;
-    transition: background 0.3s;
-}
-[data-testid="collapsedControl"]:hover {
-    background: rgba(255,255,255,0.10) !important;
-}
 </style>
 <div class="dreamy-glow"></div>
 <div class="dreamy-aurora"></div>
