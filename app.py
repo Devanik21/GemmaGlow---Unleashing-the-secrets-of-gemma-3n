@@ -120,7 +120,7 @@ st.markdown("""
 def init_gemini():
     try:
         genai.configure(api_key=st.secrets["gemini_api_key"])
-        return genai.GenerativeModel('gemini-pro')
+        return genai.GenerativeModel('gemma-3n-e4b-it')
     except Exception as e:
         st.error(f"Error initializing Gemini: {e}")
         return None
