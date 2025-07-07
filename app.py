@@ -631,12 +631,13 @@ def main():
     features = [
         "🌸", "🧠", "✨", "🎭", "🌐", "🚀", "💫",
         "🌙", "🔮", "🐉", "⚛️", "👁️", "🤖", "🧠", "🧘", "⏳", "🪐",
-        "🦄", "🧩", "📈", "🧬", "🛰️"  # Added 22nd tab
+        "🦄", "🧩", "📈", "🧬", "🛰️",  # 22nd tab
+        "🧪"  # 23rd tab: PromptLab
     ]
     (
         tab1, tab2, tab3, tab4, tab5, tab6, tab7,
         tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15, tab16, tab17,
-        tab18, tab19, tab20, tab21, tab22
+        tab18, tab19, tab20, tab21, tab22, tab23
     ) = st.tabs(features)
 
     # Transparent, collapsed sidebar for beginner guidance
@@ -696,8 +697,9 @@ def main():
             <li><span class="tabicon">📈</span><b>DataViz</b>: Visualize your data with AI-powered charts.</li>
             <li><span class="tabicon">🧬</span><b>BioBuddy</b>: Get biology facts, mnemonics, and diagrams.</li>
             <li><span class="tabicon">🛰️</span><b>SynthAI</b>: Advanced multi-task AI—combine summarization, Q&A, and visualization in one step.</li>
+            <li><span class="tabicon">🧪</span><b>PromptLab</b>: Advanced prompt playground—experiment with custom instructions, system prompts, and temperature for ultimate AI control.</li>
         </ul>
-        <div style="margin-top:1.2em; color:#a8e9ed; font-size:0.93em;">
+        <div style="margin-top:1.2em; color:#b0b0b0; font-size:0.93em;">
             <b>Tip:</b> Click any icon tab above to explore its feature!
         </div>
         </div>
@@ -1312,6 +1314,56 @@ def main():
                             {"<b>Answer:</b><br>"+answer+"<br><br>" if answer else ""}
                             {chart_html}
                         </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Feature 23: PromptLab - Advanced Prompt Playground
+    with tab23:
+        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
+        st.markdown("### 🧪 PromptLab - Advanced Prompt Playground")
+        st.markdown("Experiment with advanced prompt engineering: set system instructions, user prompt, and temperature for fine-tuned AI responses.")
+
+        system_prompt = st.text_area(
+            "System Instructions (optional):",
+            placeholder="E.g., You are a witty assistant who always answers in rhymes.",
+            height=80,
+            key="promptlab_system"
+        )
+        user_prompt = st.text_area(
+            "User Prompt:",
+            placeholder="Ask anything or give a task...",
+            height=120,
+            key="promptlab_user"
+        )
+        temperature = st.slider(
+            "Creativity (Temperature):",
+            min_value=0.0, max_value=1.0, value=0.7, step=0.05,
+            key="promptlab_temp"
+        )
+        if st.button("🧪 Run PromptLab", key="promptlab_btn"):
+            if user_prompt:
+                with st.spinner("Generating response..."):
+                    # Try to use system prompt and temperature if supported, else fallback
+                    try:
+                        if model and hasattr(model, "generate_content"):
+                            # If the model supports temperature/system prompt, use them
+                            response = model.generate_content(
+                                user_prompt,
+                                generation_config={"temperature": temperature},
+                                system_instruction=system_prompt if system_prompt else None
+                            )
+                            result = response.text
+                        else:
+                            # Fallback: concatenate system prompt
+                            prompt = (system_prompt + "\n" if system_prompt else "") + user_prompt
+                            result = generate_response(prompt)
+                    except Exception as e:
+                        result = f"Error: {e}"
+                    st.markdown(f"""
+                    <div class="result-container">
+                        <div class="result-title">🧪 PromptLab Output</div>
+                        <div class="result-content">{result}</div>
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
