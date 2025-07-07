@@ -1287,6 +1287,13 @@ st.markdown("""
     100% { background-position: 100% 50%;}
 }
 
+/* Make collapsed sidebar fully transparent, remove border/shadow */
+section[data-testid="collapsedControl"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 /* Dreamy floating particles override for more shimmer */
 .floating-particles .particle {
     background: radial-gradient(circle, #fff 0%, #f093fb 80%, transparent 100%);
