@@ -616,12 +616,12 @@ def main():
     features = [
         "🌸", "🧠", "✨", "🎭", "🌐", "🚀", "💫",
         "🌙", "🔮", "🐉", "⚛️", "👁️", "🤖", "🧠", "🧘", "⏳", "🪐",
-        "🦄", "🧩", "📈", "🧬"  # New tabs: 18-21
+        "🦄", "🧩", "📈", "🧬", "🛰️"  # Added 22nd tab
     ]
     (
         tab1, tab2, tab3, tab4, tab5, tab6, tab7,
         tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15, tab16, tab17,
-        tab18, tab19, tab20, tab21
+        tab18, tab19, tab20, tab21, tab22
     ) = st.tabs(features)
 
     # Transparent, collapsed sidebar for beginner guidance
@@ -680,6 +680,7 @@ def main():
             <li><span class="tabicon">🧩</span><b>PuzzleBox</b>: Solve or create fun puzzles and riddles.</li>
             <li><span class="tabicon">📈</span><b>DataViz</b>: Visualize your data with AI-powered charts.</li>
             <li><span class="tabicon">🧬</span><b>BioBuddy</b>: Get biology facts, mnemonics, and diagrams.</li>
+            <li><span class="tabicon">🛰️</span><b>SynthAI</b>: Advanced multi-task AI—combine summarization, Q&A, and visualization in one step.</li>
         </ul>
         <div style="margin-top:1.2em; color:#b0b0b0; font-size:0.93em;">
             <b>Tip:</b> Click any icon tab above to explore its feature!
@@ -1257,6 +1258,45 @@ def main():
                     <div class="result-container">
                         <div class="result-title">🧬 BioBuddy</div>
                         <div class="result-content">{bio_answer}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Feature 22: SynthAI - Advanced Multi-Tasker
+    with tab22:
+        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
+        st.markdown("### 🛰️ SynthAI - Advanced Multi-Tasker")
+        st.markdown("Combine summarization, Q&A, and visualization in one step. Paste a document, ask a question, and get a summary, answer, and a chart if possible.")
+        synth_text = st.text_area("Paste your document or data:", placeholder="Paste text or CSV data...", key="synth_text")
+        synth_question = st.text_input("Ask a question about the above:", placeholder="What are the key trends?", key="synth_question")
+        synth_mode = st.selectbox("Mode:", ["Auto", "Text Only", "Data (CSV)"], key="synth_mode")
+        if st.button("🚀 Run SynthAI", key="synthai_btn"):
+            if synth_text:
+                with st.spinner("Synthesizing..."):
+                    # Summarization
+                    summary = generate_response(f"Summarize this for an expert: {synth_text}")
+                    # Q&A
+                    answer = generate_response(f"Based on this, answer: {synth_question}\n\nText:\n{synth_text}") if synth_question else ""
+                    # Visualization if CSV
+                    chart_html = ""
+                    if synth_mode in ["Auto", "Data (CSV)"]:
+                        try:
+                            df = pd.read_csv(pd.compat.StringIO(synth_text))
+                            fig = px.line(df) if len(df.columns) >= 2 else None
+                            if fig:
+                                st.plotly_chart(fig, use_container_width=True)
+                                chart_html = "<div style='margin-top:1em;'>Chart generated from your data above.</div>"
+                        except Exception:
+                            if synth_mode == "Data (CSV)":
+                                st.warning("Could not parse CSV for visualization.")
+                    st.markdown(f"""
+                    <div class="result-container">
+                        <div class="result-title">🛰️ SynthAI Results</div>
+                        <div class="result-content">
+                            <b>Summary:</b><br>{summary}<br><br>
+                            {"<b>Answer:</b><br>"+answer+"<br><br>" if answer else ""}
+                            {chart_html}
+                        </div>
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
