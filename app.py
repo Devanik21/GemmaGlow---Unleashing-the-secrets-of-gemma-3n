@@ -912,8 +912,8 @@ st.markdown("""
 /* Dreamy text glow */
 .hero-title, .result-title, .stat-number {
     /* Reduced glow for readability */
-    text-shadow: 0 0 8px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
-    letter-spacing: 0.06em;
+    text-shadow: 0 0 80px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
+    letter-spacing: 0.09em;
 }
 
 /* Floating sparkles */
