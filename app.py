@@ -913,7 +913,7 @@ st.markdown("""
 .hero-title, .result-title, .stat-number {
     /* Reduced glow for readability */
     text-shadow: 0 0 3px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
 }
 
 /* Floating sparkles */
