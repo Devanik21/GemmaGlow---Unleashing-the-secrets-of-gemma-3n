@@ -697,7 +697,7 @@ def main():
             <li><span class="tabicon">🧬</span><b>BioBuddy</b>: Get biology facts, mnemonics, and diagrams.</li>
             <li><span class="tabicon">🛰️</span><b>SynthAI</b>: Advanced multi-task AI—combine summarization, Q&A, and visualization in one step.</li>
         </ul>
-        <div style="margin-top:1.2em; color:#007d96; font-size:0.93em;">
+        <div style="margin-top:1.2em; color:#a8e9ed; font-size:0.93em;">
             <b>Tip:</b> Click any icon tab above to explore its feature!
         </div>
         </div>
