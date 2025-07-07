@@ -430,108 +430,7 @@ st.markdown("""
         90% { opacity: 1; }
         100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
     }
-
-    /* Outerwordly cosmic rays */
-    .outer-cosmic-rays {
-        position: fixed;
-        top: 0; left: 0; width: 100vw; height: 100vh;
-        pointer-events: none;
-        z-index: 0;
-        background: repeating-conic-gradient(from 0deg, rgba(240,147,251,0.07) 0deg 10deg, transparent 10deg 20deg);
-        mix-blend-mode: lighten;
-        opacity: 0.25;
-        animation: cosmicRaysSpin 60s linear infinite;
-    }
-    @keyframes cosmicRaysSpin {
-        0% { transform: rotate(0deg);}
-        100% { transform: rotate(360deg);}
-    }
-    
-    /* Animated nebula swirl */
-    .outer-nebula {
-        position: fixed;
-        top: -20vh; left: -20vw; width: 140vw; height: 140vh;
-        pointer-events: none;
-        z-index: 0;
-        background: radial-gradient(circle at 60% 40%, rgba(76,175,254,0.10) 0%, rgba(240,147,251,0.09) 60%, transparent 100%);
-        filter: blur(60px) saturate(1.5);
-        opacity: 0.7;
-        animation: nebulaMove 40s ease-in-out infinite alternate;
-    }
-    @keyframes nebulaMove {
-        0% { background-position: 0% 0%;}
-        100% { background-position: 100% 100%;}
-    }
-    
-    /* Animated shooting stars */
-    .shooting-star {
-        position: fixed;
-        width: 2px;
-        height: 80px;
-        background: linear-gradient(180deg, #fff 0%, #f093fb 80%, transparent 100%);
-        opacity: 0.7;
-        border-radius: 2px;
-        z-index: 999;
-        pointer-events: none;
-        animation: shootingStarAnim 3s linear infinite;
-    }
-    @keyframes shootingStarAnim {
-        0% { top: -80px; left: 10vw; opacity: 0;}
-        10% { opacity: 1;}
-        80% { opacity: 1;}
-        100% { top: 110vh; left: 90vw; opacity: 0;}
-    }
-    
-    /* Cosmic floating glyphs */
-    .cosmic-glyph {
-        position: fixed;
-        font-size: 2.5rem;
-        color: rgba(255,255,255,0.18);
-        pointer-events: none;
-        z-index: 999;
-        animation: glyphFloat 22s ease-in-out infinite alternate;
-    }
-    @keyframes glyphFloat {
-        0% { transform: translateY(0px) scale(1);}
-        50% { transform: translateY(-40px) scale(1.1);}
-        100% { transform: translateY(0px) scale(1);}
-    }
 </style>
-<div class="dreamy-glow"></div>
-<div class="dreamy-aurora"></div>
-<div class="dreamy-cloud cloud1"></div>
-<div class="dreamy-cloud cloud2"></div>
-<div class="dreamy-cloud cloud3"></div>
-<div class="dreamy-cloud cloud4"></div>
-<div class="outer-cosmic-rays"></div>
-<div class="outer-nebula"></div>
-<script>
-for(let i=0;i<12;i++){
-    let s=document.createElement('div');
-    s.className='dreamy-sparkle';
-    s.style.left=Math.random()*100+'vw';
-    s.style.top=Math.random()*100+'vh';
-    s.style.animationDelay=(Math.random()*7)+'s';
-    document.body.appendChild(s);
-}
-for(let i=0;i<3;i++){
-    let s=document.createElement('div');
-    s.className='shooting-star';
-    s.style.left=(10+Math.random()*80)+'vw';
-    s.style.animationDelay=(Math.random()*5)+'s';
-    document.body.appendChild(s);
-}
-const glyphs = ['✦','✧','☄','✺','✹','✶','✷','✸','✻','✼','✽','✾','❈','❉','❊','❋','☼','☀','☽','☾'];
-for(let i=0;i<8;i++){
-    let g=document.createElement('div');
-    g.className='cosmic-glyph';
-    g.innerText=glyphs[Math.floor(Math.random()*glyphs.length)];
-    g.style.left=(Math.random()*100)+'vw';
-    g.style.top=(Math.random()*100)+'vh';
-    g.style.animationDelay=(Math.random()*20)+'s';
-    document.body.appendChild(g);
-}
-</script>
 """, unsafe_allow_html=True)
 
 # Add floating particles
@@ -612,74 +511,12 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    # Short tab names and icons for compact navigation
+    # Navigation
     features = [
-        "🌸", "🧠", "✨", "🎭", "🌐", "🚀", "💫",
-        "🌙", "🔮", "🐉", "⚛️", "👁️", "🤖", "🧠", "🧘", "⏳", "🪐"
+        "🌸 MoodSync", "🧠 QuickThink", "✨ CreateSpark",
+        "🎭 DebateBot", "🌐 MultiLingua", "🚀 PromptCraft", "💫 ThoughtLoop"
     ]
-    (
-        tab1, tab2, tab3, tab4, tab5, tab6, tab7,
-        tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15, tab16, tab17
-    ) = st.tabs(features)
-
-    # Transparent, collapsed sidebar for beginner guidance
-    with st.sidebar:
-        st.markdown("""
-        <style>
-        .element-container:has(.sidebar-guide) {
-            background: rgba(255,255,255,0.07) !important;
-            border-radius: 18px;
-            border: 1px solid rgba(255,255,255,0.13);
-            margin: 0.5rem 0.2rem 0.5rem 0.2rem;
-            padding: 1.2rem 1rem 1.2rem 1rem;
-            box-shadow: 0 4px 24px rgba(102,126,234,0.08);
-            font-family: 'Inter', sans-serif;
-        }
-        .sidebar-guide h4 {
-            color: #fff !important;
-            margin-bottom: 0.7em;
-            font-size: 1.1em;
-            letter-spacing: 0.04em;
-        }
-        .sidebar-guide ul {
-            padding-left: 1.1em;
-        }
-        .sidebar-guide li {
-            margin-bottom: 0.5em;
-            color: #e0e0e0;
-            font-size: 0.97em;
-        }
-        .sidebar-guide .tabicon {
-            font-size: 1.2em;
-            margin-right: 0.4em;
-        }
-        </style>
-        <div class="sidebar-guide">
-        <h4>✨ Beginner's Guide</h4>
-        <ul>
-            <li><span class="tabicon">🌸</span><b>MoodSync</b>: Analyze your emotions and get empathetic AI support.</li>
-            <li><span class="tabicon">🧠</span><b>QuickThink</b>: Summarize, explain, or metaphorize any text.</li>
-            <li><span class="tabicon">✨</span><b>CreateSpark</b>: Generate poems, stories, visuals, and concepts.</li>
-            <li><span class="tabicon">🎭</span><b>DebateBot</b>: AI debates on any topic with multiple personas.</li>
-            <li><span class="tabicon">🌐</span><b>MultiLingua</b>: Translate text and learn about world languages.</li>
-            <li><span class="tabicon">🚀</span><b>PromptCraft</b>: Get custom prompts for your AI tasks.</li>
-            <li><span class="tabicon">💫</span><b>ThoughtLoop</b>: Visual mind mapping for your ideas.</li>
-            <li><span class="tabicon">🌙</span><b>DreamWeaver</b>: Mystical dream interpretation.</li>
-            <li><span class="tabicon">🔮</span><b>AstroGuide</b>: Daily horoscopes and cosmic advice.</li>
-            <li><span class="tabicon">🐉</span><b>MythMaker</b>: Create your own myths and legends.</li>
-            <li><span class="tabicon">⚛️</span><b>QuantumQuiz</b>: Fun science quizzes on any topic.</li>
-            <li><span class="tabicon">👁️</span><b>Visionary</b>: Generate prompts for AI art.</li>
-            <li><span class="tabicon">🤖</span><b>CodeMuse</b>: Coding project ideas and starter prompts.</li>
-            <li><span class="tabicon">🧠</span><b>MemoryPal</b>: Build memory palaces for learning.</li>
-            <li><span class="tabicon">🧘</span><b>ZenZone</b>: Guided meditations for relaxation.</li>
-            <li><span class="tabicon">⏳</span><b>TimeCapsule</b>: Write a letter to your future self.</li>
-            <li><span class="tabicon">🪐</span><b>WonderWall</b>: Ask cosmic questions, get awe-inspiring answers.</li>
-        </ul>
-        <div style="margin-top:1.2em; color:#b0b0b0; font-size:0.93em;">
-            <b>Tip:</b> Click any icon tab above to explore its feature!
-        </div>
-        </div>
-        """, unsafe_allow_html=True)
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(features)
 
     # Feature 1: MoodSync
     with tab1:
@@ -1010,180 +847,6 @@ def main():
                     st.markdown('</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # Feature 8: DreamWeaver - AI Dream Interpreter
-    with tab8:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🌙 DreamWeaver - Dream Interpreter")
-        dream_input = st.text_area("Describe your dream:", placeholder="Last night I was flying over a city of stars...", key="dream_input")
-        if st.button("🌌 Interpret Dream", key="dream_btn"):
-            if dream_input:
-                with st.spinner("Decoding your dream..."):
-                    dream_result = generate_response(f"Interpret this dream in a mystical, symbolic way: {dream_input}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">🌙 Dream Interpretation</div>
-                        <div class="result-content">{dream_result}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 9: AstroGuide - AI Horoscope & Cosmic Advice
-    with tab9:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🔮 AstroGuide - Horoscope & Cosmic Advice")
-        sign = st.selectbox("Your Zodiac Sign:", [
-            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
-        ], key="astro_sign")
-        if st.button("✨ Reveal Horoscope", key="astro_btn"):
-            with st.spinner("Consulting the stars..."):
-                horoscope = generate_response(f"Give a poetic, uplifting horoscope for {sign} today.")
-                st.markdown(f"""
-                <div class="result-container">
-                    <div class="result-title">🔮 {sign} Horoscope</div>
-                    <div class="result-content">{horoscope}</div>
-                </div>
-                """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 10: MythMaker - AI Myth Generator
-    with tab10:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🐉 MythMaker - Create Your Own Myth")
-        myth_theme = st.text_input("Myth Theme:", placeholder="The origin of the moon...", key="myth_theme")
-        if st.button("🐲 Generate Myth", key="myth_btn"):
-            if myth_theme:
-                with st.spinner("Spinning a legend..."):
-                    myth = generate_response(f"Invent a short, original myth about: {myth_theme}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">🐉 New Myth</div>
-                        <div class="result-content">{myth}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 11: QuantumQuiz - AI Science Quizzer
-    with tab11:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### ⚛️ QuantumQuiz - Science Quiz")
-        quiz_topic = st.text_input("Quiz Topic:", placeholder="Black holes, Quantum mechanics...", key="quiz_topic")
-        num_q = st.slider("Number of Questions", 1, 5, 3, key="quiz_numq")
-        if st.button("🧪 Start Quiz", key="quiz_btn"):
-            if quiz_topic:
-                with st.spinner("Generating quiz..."):
-                    quiz = generate_response(f"Create a {num_q}-question multiple choice science quiz on: {quiz_topic}. Format: Q: ...\nA) ...\nB) ...\nC) ...\nD) ...")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">⚛️ {quiz_topic.title()} Quiz</div>
-                        <div class="result-content"><pre>{quiz}</pre></div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 12: Visionary - AI Image Prompt Generator
-    with tab12:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 👁️ Visionary - Image Prompt Generator")
-        vision_theme = st.text_input("Describe your vision:", placeholder="A city floating above clouds...", key="vision_theme")
-        if st.button("🎨 Generate Image Prompt", key="vision_btn"):
-            if vision_theme:
-                with st.spinner("Imagining..."):
-                    img_prompt = generate_response(f"Write a detailed, vivid prompt for an AI art generator about: {vision_theme}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">👁️ Art Prompt</div>
-                        <div class="result-content">{img_prompt}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 13: CodeMuse - AI Code Inspiration
-    with tab13:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🤖 CodeMuse - Coding Inspiration")
-        code_goal = st.text_input("What do you want to build?", placeholder="A weather app, a chatbot...", key="code_goal")
-        if st.button("💡 Inspire Me", key="code_btn"):
-            if code_goal:
-                with st.spinner("Summoning code muses..."):
-                    code_idea = generate_response(f"Suggest a creative coding project idea and a starter prompt for: {code_goal}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">🤖 Code Inspiration</div>
-                        <div class="result-content">{code_idea}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 14: MemoryPal - AI Memory Palace
-    with tab14:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🧠 MemoryPal - Memory Palace Builder")
-        memory_topic = st.text_input("Topic to memorize:", placeholder="Planets of the solar system...", key="memory_topic")
-        if st.button("🏰 Build Memory Palace", key="memory_btn"):
-            if memory_topic:
-                with st.spinner("Constructing your palace..."):
-                    palace = generate_response(f"Create a vivid memory palace story to help memorize: {memory_topic}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">🧠 Memory Palace</div>
-                        <div class="result-content">{palace}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 15: ZenZone - AI Guided Meditation
-    with tab15:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🧘 ZenZone - Guided Meditation")
-        zen_focus = st.text_input("Meditation focus:", placeholder="Relaxation, focus, gratitude...", key="zen_focus")
-        if st.button("🕉️ Start Meditation", key="zen_btn"):
-            if zen_focus:
-                with st.spinner("Preparing your meditation..."):
-                    meditation = generate_response(f"Guide me through a short meditation for: {zen_focus}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">🧘 Meditation</div>
-                        <div class="result-content">{meditation}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 16: TimeCapsule - AI Time Capsule Letter
-    with tab16:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### ⏳ TimeCapsule - Letter to the Future")
-        capsule_msg = st.text_area("Write your message to the future:", placeholder="Dear future me...", key="capsule_msg")
-        years = st.slider("Years into the future:", 1, 50, 10, key="capsule_years")
-        if st.button("📜 Seal Time Capsule", key="capsule_btn"):
-            if capsule_msg:
-                with st.spinner("Sealing your message..."):
-                    letter = generate_response(f"Write a heartfelt letter to myself {years} years in the future: {capsule_msg}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">⏳ Time Capsule Letter</div>
-                        <div class="result-content">{letter}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # Feature 17: WonderWall - AI Curiosity Wall
-    with tab17:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🪐 WonderWall - Ask Anything Cosmic")
-        wonder_q = st.text_input("Ask your cosmic question:", placeholder="Why do we dream? What is dark matter?...", key="wonder_q")
-        if st.button("🌠 Ask the Cosmos", key="wonder_btn"):
-            if wonder_q:
-                with st.spinner("Listening to the universe..."):
-                    answer = generate_response(f"Answer this question in a cosmic, awe-inspiring way: {wonder_q}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">🪐 Cosmic Answer</div>
-                        <div class="result-content">{answer}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
     # Footer
     st.markdown("""
     <div style='text-align:center; margin-top:3rem; color:rgba(255,255,255,0.6); font-size:0.95rem; letter-spacing:0.03em;'>
@@ -1248,9 +911,8 @@ st.markdown("""
 
 /* Dreamy text glow */
 .hero-title, .result-title, .stat-number {
-    /* Reduced glow for readability */
-    text-shadow: 0 0 3px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
-    letter-spacing: 0.1em;
+    text-shadow: 0 0 18px #fff, 0 0 40px #f093fb, 0 0 8px #4facfe;
+    letter-spacing: 0.04em;
 }
 
 /* Floating sparkles */
@@ -1287,13 +949,6 @@ st.markdown("""
     100% { background-position: 100% 50%;}
 }
 
-/* Make collapsed sidebar fully transparent, remove border/shadow */
-section[data-testid="collapsedControl"] {
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
 /* Dreamy floating particles override for more shimmer */
 .floating-particles .particle {
     background: radial-gradient(circle, #fff 0%, #f093fb 80%, transparent 100%);
@@ -1308,8 +963,6 @@ section[data-testid="collapsedControl"] {
 <div class="dreamy-cloud cloud2"></div>
 <div class="dreamy-cloud cloud3"></div>
 <div class="dreamy-cloud cloud4"></div>
-<div class="outer-cosmic-rays"></div>
-<div class="outer-nebula"></div>
 <script>
 for(let i=0;i<12;i++){
     let s=document.createElement('div');
@@ -1318,23 +971,6 @@ for(let i=0;i<12;i++){
     s.style.top=Math.random()*100+'vh';
     s.style.animationDelay=(Math.random()*7)+'s';
     document.body.appendChild(s);
-}
-for(let i=0;i<3;i++){
-    let s=document.createElement('div');
-    s.className='shooting-star';
-    s.style.left=(10+Math.random()*80)+'vw';
-    s.style.animationDelay=(Math.random()*5)+'s';
-    document.body.appendChild(s);
-}
-const glyphs = ['✦','✧','☄','✺','✹','✶','✷','✸','✻','✼','✽','✾','❈','❉','❊','❋','☼','☀','☽','☾'];
-for(let i=0;i<8;i++){
-    let g=document.createElement('div');
-    g.className='cosmic-glyph';
-    g.innerText=glyphs[Math.floor(Math.random()*glyphs.length)];
-    g.style.left=(Math.random()*100)+'vw';
-    g.style.top=(Math.random()*100)+'vh';
-    g.style.animationDelay=(Math.random()*20)+'s';
-    document.body.appendChild(g);
 }
 </script>
 """, unsafe_allow_html=True)
