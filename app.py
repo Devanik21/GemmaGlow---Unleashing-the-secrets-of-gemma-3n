@@ -858,3 +858,119 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+st.markdown("""
+<style>
+/* Dreamy, ethereal overlays and glows */
+.dreamy-glow {
+    position: fixed;
+    top: -10%;
+    left: -10%;
+    width: 120vw;
+    height: 120vh;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, rgba(240,147,251,0.10) 40%, transparent 80%),
+                radial-gradient(circle at 70% 70%, rgba(102,126,234,0.10) 0%, rgba(76,175,254,0.08) 50%, transparent 90%);
+    filter: blur(40px) saturate(1.2);
+    opacity: 0.85;
+    animation: dreamyFade 18s ease-in-out infinite alternate;
+}
+@keyframes dreamyFade {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+/* Subtle floating nebula clouds */
+.dreamy-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.45;
+    filter: blur(30px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.dreamy-cloud.cloud1 { width: 320px; height: 180px; top: 10%; left: 5%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.dreamy-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.dreamy-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.dreamy-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Glowing border for main container */
+.main-container, .feature-card, .result-container, .mind-map-container {
+    box-shadow: 0 0 40px 8px rgba(240,147,251,0.12), 0 0 80px 0px rgba(102,126,234,0.10) !important;
+    border: 1.5px solid rgba(255,255,255,0.18) !important;
+    backdrop-filter: blur(24px) !important;
+}
+
+/* Dreamy text glow */
+.hero-title, .result-title, .stat-number {
+    text-shadow: 0 0 18px #fff, 0 0 40px #f093fb, 0 0 8px #4facfe;
+    letter-spacing: 0.04em;
+}
+
+/* Floating sparkles */
+.dreamy-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, #f093fb 60%, transparent 100%);
+    opacity: 0.7;
+    animation: sparkleFloat 7s linear infinite;
+}
+@keyframes sparkleFloat {
+    0% { transform: translateY(0) scale(1);}
+    50% { transform: translateY(-40px) scale(1.2);}
+    100% { transform: translateY(0) scale(1);}
+}
+
+/* Dreamy aurora overlay */
+.dreamy-aurora {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(255,255,255,0.04) 0%, rgba(240,147,251,0.07) 40%, rgba(76,175,254,0.05) 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.7;
+    animation: auroraMove 22s ease-in-out infinite alternate;
+}
+@keyframes auroraMove {
+    0% { background-position: 0% 50%;}
+    100% { background-position: 100% 50%;}
+}
+
+/* Dreamy floating particles override for more shimmer */
+.floating-particles .particle {
+    background: radial-gradient(circle, #fff 0%, #f093fb 80%, transparent 100%);
+    opacity: 0.8;
+    filter: blur(0.5px) brightness(1.2);
+    animation-duration: 18s;
+}
+</style>
+<div class="dreamy-glow"></div>
+<div class="dreamy-aurora"></div>
+<div class="dreamy-cloud cloud1"></div>
+<div class="dreamy-cloud cloud2"></div>
+<div class="dreamy-cloud cloud3"></div>
+<div class="dreamy-cloud cloud4"></div>
+<script>
+for(let i=0;i<12;i++){
+    let s=document.createElement('div');
+    s.className='dreamy-sparkle';
+    s.style.left=Math.random()*100+'vw';
+    s.style.top=Math.random()*100+'vh';
+    s.style.animationDelay=(Math.random()*7)+'s';
+    document.body.appendChild(s);
+}
+</script>
+""", unsafe_allow_html=True)
