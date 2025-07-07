@@ -615,11 +615,13 @@ def main():
     # Short tab names and icons for compact navigation
     features = [
         "🌸", "🧠", "✨", "🎭", "🌐", "🚀", "💫",
-        "🌙", "🔮", "🐉", "⚛️", "👁️", "🤖", "🧠", "🧘", "⏳", "🪐"
+        "🌙", "🔮", "🐉", "⚛️", "👁️", "🤖", "🧠", "🧘", "⏳", "🪐",
+        "🦄", "🧩", "📈", "🧬"  # New tabs: 18-21
     ]
     (
         tab1, tab2, tab3, tab4, tab5, tab6, tab7,
-        tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15, tab16, tab17
+        tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15, tab16, tab17,
+        tab18, tab19, tab20, tab21
     ) = st.tabs(features)
 
     # Transparent, collapsed sidebar for beginner guidance
@@ -674,6 +676,10 @@ def main():
             <li><span class="tabicon">🧘</span><b>ZenZone</b>: Guided meditations for relaxation.</li>
             <li><span class="tabicon">⏳</span><b>TimeCapsule</b>: Write a letter to your future self.</li>
             <li><span class="tabicon">🪐</span><b>WonderWall</b>: Ask cosmic questions, get awe-inspiring answers.</li>
+            <li><span class="tabicon">🦄</span><b>IdeaGenie</b>: Instantly generate creative ideas for any topic.</li>
+            <li><span class="tabicon">🧩</span><b>PuzzleBox</b>: Solve or create fun puzzles and riddles.</li>
+            <li><span class="tabicon">📈</span><b>DataViz</b>: Visualize your data with AI-powered charts.</li>
+            <li><span class="tabicon">🧬</span><b>BioBuddy</b>: Get biology facts, mnemonics, and diagrams.</li>
         </ul>
         <div style="margin-top:1.2em; color:#b0b0b0; font-size:0.93em;">
             <b>Tip:</b> Click any icon tab above to explore its feature!
@@ -1180,6 +1186,77 @@ def main():
                     <div class="result-container">
                         <div class="result-title">🪐 Cosmic Answer</div>
                         <div class="result-content">{answer}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Feature 18: IdeaGenie
+    with tab18:
+        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
+        st.markdown("### 🦄 IdeaGenie - Instant Idea Generator")
+        genie_topic = st.text_input("Topic or area:", placeholder="Startup, party theme, app, etc.", key="genie_topic")
+        if st.button("✨ Generate Ideas", key="genie_btn"):
+            if genie_topic:
+                with st.spinner("Summoning ideas..."):
+                    ideas = generate_response(f"Generate 5 creative, original ideas for: {genie_topic}")
+                    st.markdown(f"""
+                    <div class="result-container">
+                        <div class="result-title">🦄 Ideas</div>
+                        <div class="result-content">{ideas}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Feature 19: PuzzleBox
+    with tab19:
+        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
+        st.markdown("### 🧩 PuzzleBox - Puzzles & Riddles")
+        puzzle_type = st.selectbox("Puzzle type:", ["Riddle", "Logic Puzzle", "Math Puzzle"], key="puzzle_type")
+        if st.button("🧠 Get Puzzle", key="puzzle_btn"):
+            with st.spinner("Thinking up a puzzle..."):
+                puzzle = generate_response(f"Give me a {puzzle_type.lower()} with answer. Format: Puzzle: ... Answer: ...")
+                st.markdown(f"""
+                <div class="result-container">
+                    <div class="result-title">🧩 {puzzle_type}</div>
+                    <div class="result-content">{puzzle}</div>
+                </div>
+                """, unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Feature 20: DataViz
+    with tab20:
+        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
+        st.markdown("### 📈 DataViz - AI Data Visualization")
+        data_input = st.text_area("Paste CSV data (with headers):", placeholder="year,value\n2020,100\n2021,150", key="dataviz_input")
+        chart_type = st.selectbox("Chart type:", ["Line", "Bar", "Scatter"], key="dataviz_chart")
+        if st.button("📊 Visualize", key="dataviz_btn"):
+            if data_input:
+                try:
+                    df = pd.read_csv(pd.compat.StringIO(data_input))
+                    if chart_type == "Line":
+                        fig = px.line(df)
+                    elif chart_type == "Bar":
+                        fig = px.bar(df)
+                    else:
+                        fig = px.scatter(df)
+                    st.plotly_chart(fig, use_container_width=True)
+                except Exception as e:
+                    st.error(f"Could not parse data: {e}")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Feature 21: BioBuddy
+    with tab21:
+        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
+        st.markdown("### 🧬 BioBuddy - Biology Helper")
+        bio_query = st.text_input("Ask a biology question or topic:", placeholder="Explain photosynthesis, DNA structure...", key="bio_query")
+        if st.button("🌱 Get Bio Help", key="bio_btn"):
+            if bio_query:
+                with st.spinner("Consulting BioBuddy..."):
+                    bio_answer = generate_response(f"Explain this biology topic in a clear, visual way. Add a mnemonic if possible: {bio_query}")
+                    st.markdown(f"""
+                    <div class="result-container">
+                        <div class="result-title">🧬 BioBuddy</div>
+                        <div class="result-content">{bio_answer}</div>
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
