@@ -612,17 +612,74 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    # Navigation
+    # Short tab names and icons for compact navigation
     features = [
-        "🌸 MoodSync", "🧠 QuickThink", "✨ CreateSpark",
-        "🎭 DebateBot", "🌐 MultiLingua", "🚀 PromptCraft", "💫 ThoughtLoop",
-        "🌙 DreamWeaver", "🔮 AstroGuide", "🐉 MythMaker", "⚛️ QuantumQuiz", "👁️ Visionary",
-        "🤖 CodeMuse", "🧠 MemoryPal", "🧘 ZenZone", "⏳ TimeCapsule", "🪐 WonderWall"
+        "🌸", "🧠", "✨", "🎭", "🌐", "🚀", "💫",
+        "🌙", "🔮", "🐉", "⚛️", "👁️", "🤖", "🧠", "🧘", "⏳", "🪐"
     ]
     (
         tab1, tab2, tab3, tab4, tab5, tab6, tab7,
         tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15, tab16, tab17
     ) = st.tabs(features)
+
+    # Transparent, collapsed sidebar for beginner guidance
+    with st.sidebar:
+        st.markdown("""
+        <style>
+        .element-container:has(.sidebar-guide) {
+            background: rgba(255,255,255,0.07) !important;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.13);
+            margin: 0.5rem 0.2rem 0.5rem 0.2rem;
+            padding: 1.2rem 1rem 1.2rem 1rem;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.08);
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-guide h4 {
+            color: #fff !important;
+            margin-bottom: 0.7em;
+            font-size: 1.1em;
+            letter-spacing: 0.04em;
+        }
+        .sidebar-guide ul {
+            padding-left: 1.1em;
+        }
+        .sidebar-guide li {
+            margin-bottom: 0.5em;
+            color: #e0e0e0;
+            font-size: 0.97em;
+        }
+        .sidebar-guide .tabicon {
+            font-size: 1.2em;
+            margin-right: 0.4em;
+        }
+        </style>
+        <div class="sidebar-guide">
+        <h4>✨ Beginner's Guide</h4>
+        <ul>
+            <li><span class="tabicon">🌸</span><b>MoodSync</b>: Analyze your emotions and get empathetic AI support.</li>
+            <li><span class="tabicon">🧠</span><b>QuickThink</b>: Summarize, explain, or metaphorize any text.</li>
+            <li><span class="tabicon">✨</span><b>CreateSpark</b>: Generate poems, stories, visuals, and concepts.</li>
+            <li><span class="tabicon">🎭</span><b>DebateBot</b>: AI debates on any topic with multiple personas.</li>
+            <li><span class="tabicon">🌐</span><b>MultiLingua</b>: Translate text and learn about world languages.</li>
+            <li><span class="tabicon">🚀</span><b>PromptCraft</b>: Get custom prompts for your AI tasks.</li>
+            <li><span class="tabicon">💫</span><b>ThoughtLoop</b>: Visual mind mapping for your ideas.</li>
+            <li><span class="tabicon">🌙</span><b>DreamWeaver</b>: Mystical dream interpretation.</li>
+            <li><span class="tabicon">🔮</span><b>AstroGuide</b>: Daily horoscopes and cosmic advice.</li>
+            <li><span class="tabicon">🐉</span><b>MythMaker</b>: Create your own myths and legends.</li>
+            <li><span class="tabicon">⚛️</span><b>QuantumQuiz</b>: Fun science quizzes on any topic.</li>
+            <li><span class="tabicon">👁️</span><b>Visionary</b>: Generate prompts for AI art.</li>
+            <li><span class="tabicon">🤖</span><b>CodeMuse</b>: Coding project ideas and starter prompts.</li>
+            <li><span class="tabicon">🧠</span><b>MemoryPal</b>: Build memory palaces for learning.</li>
+            <li><span class="tabicon">🧘</span><b>ZenZone</b>: Guided meditations for relaxation.</li>
+            <li><span class="tabicon">⏳</span><b>TimeCapsule</b>: Write a letter to your future self.</li>
+            <li><span class="tabicon">🪐</span><b>WonderWall</b>: Ask cosmic questions, get awe-inspiring answers.</li>
+        </ul>
+        <div style="margin-top:1.2em; color:#b0b0b0; font-size:0.93em;">
+            <b>Tip:</b> Click any icon tab above to explore its feature!
+        </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Feature 1: MoodSync
     with tab1:
