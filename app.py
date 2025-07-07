@@ -912,7 +912,7 @@ st.markdown("""
 /* Dreamy text glow */
 .hero-title, .result-title, .stat-number {
     /* Reduced glow for readability */
-    text-shadow: 0 0 1px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
+    text-shadow: 0 0 5px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
     letter-spacing: 0.09em;
 }
 
