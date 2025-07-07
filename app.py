@@ -367,12 +367,27 @@ st.markdown("""
     }
     
     /* Custom Streamlit overrides */
-    .stTextInput input, .stTextArea textarea, .stSelectbox select {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+    .stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
+        background: rgba(255,255,255,0.08) !important;
+        border: 1px solid rgba(255,255,255,0.18) !important;
+        color: #fff !important;
         border-radius: 15px !important;
-        color: white !important;
-        backdrop-filter: blur(10px) !important;
+        backdrop-filter: blur(8px) !important;
+        box-shadow: none !important;
+        transition: background 0.3s;
+    }
+    .stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
+        background: rgba(255,255,255,0.14) !important;
+        border-color: rgba(255,255,255,0.35) !important;
+    }
+    /* Remove default background for selectbox dropdown */
+    .stSelectbox div[role="listbox"] {
+        background: rgba(40,40,40,0.12) !important;
+        color: #fff !important;
+    }
+    /* Transparent slider track */
+    .stSlider > div[data-baseweb="slider"] > div {
+        background: rgba(255,255,255,0.10) !important;
     }
     
     .stButton button {
