@@ -50,344 +50,204 @@ st.markdown("""
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     }
     
-    /* --- Glassmorphism Card Effect --- */
+    /* --- Glassmorphism & Cosmic Effects --- */
     .main-container, .feature-card, .result-container, .mind-map-container {
-        background: rgba(255,255,255,0.13) !important;
-        border-radius: 24px !important;
-        box-shadow: 0 8px 40px 0 rgba(76,175,254,0.13), 0 1.5px 8px 0 rgba(240,147,251,0.10) !important;
-        border: 2px solid rgba(255,255,255,0.18) !important;
-        backdrop-filter: blur(24px) !important;
-        transition: box-shadow 0.4s;
+        background: rgba(255,255,255,0.18) !important;
+        border-radius: 32px !important;
+        box-shadow: 0 12px 60px 0 rgba(76,175,254,0.18), 0 2.5px 18px 0 rgba(240,147,251,0.16) !important;
+        border: 2.5px solid rgba(255,255,255,0.22) !important;
+        backdrop-filter: blur(36px) saturate(1.25) !important;
+        transition: box-shadow 0.5s;
         position: relative;
         overflow: hidden;
     }
     .feature-card:hover, .result-container:hover {
-        box-shadow: 0 0 60px 10px #f093fb33, 0 0 120px 0px #4facfe22 !important;
-        border-color: #f093fb88 !important;
+        box-shadow: 0 0 90px 20px #f093fb44, 0 0 180px 0px #4facfe33 !important;
+        border-color: #f093fbcc !important;
+        filter: brightness(1.08) saturate(1.1);
     }
-    
-    .hero-section {
-        text-align: center;
-        padding: 4rem 2rem;
-        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-        border-radius: 25px;
-        margin-bottom: 3rem;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .hero-title {
-        font-family: 'Inter', sans-serif;
-        font-size: 4.5rem;
-        font-weight: 900;
-        background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-shadow: 0 0 30px rgba(255,255,255,0.3);
-        margin-bottom: 1rem;
-        letter-spacing: -0.02em;
-    }
-    
-    .hero-subtitle {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 300;
-        color: rgba(255,255,255,0.8);
-        margin-bottom: 2rem;
-        letter-spacing: 0.02em;
-    }
-    
-    .floating-orbs {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-    }
-    
-    .orb {
-        position: absolute;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 70%, transparent 100%);
-        animation: float 6s ease-in-out infinite;
-        filter: blur(1px);
-    }
-    
-    .orb:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
-    .orb:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: 2s; }
-    .orb:nth-child(3) { width: 40px; height: 40px; top: 80%; left: 20%; animation-delay: 4s; }
-    .orb:nth-child(4) { width: 100px; height: 100px; top: 10%; left: 70%; animation-delay: 1s; }
-    .orb:nth-child(5) { width: 30px; height: 30px; top: 40%; left: 50%; animation-delay: 3s; }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(180deg); }
-    }
-    
-    .navigation-bar {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-bottom: 3rem;
-        background: rgba(255,255,255,0.1);
-        backdrop-filter: blur(15px);
-        padding: 1rem;
-        border-radius: 20px;
-        border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .nav-button {
-        background: rgba(255,255,255,0.1);
-        border: 1px solid rgba(255,255,255,0.2);
-        color: white;
-        padding: 0.8rem 1.5rem;
-        border-radius: 15px;
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        backdrop-filter: blur(10px);
-        font-size: 0.9rem;
-        letter-spacing: 0.01em;
-    }
-    
-    .nav-button:hover, .nav-button.active {
-        background: rgba(255,255,255,0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(255,255,255,0.1);
-        border-color: rgba(255,255,255,0.4);
-    }
-    
-    .feature-card {
-        background: rgba(255,255,255,0.08);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.15);
-        border-radius: 20px;
-        padding: 2rem;
-        margin: 1.5rem 0;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .feature-card::before {
+    .result-container::after, .feature-card::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        top: -30%; left: -30%;
+        width: 160%; height: 160%;
+        background: radial-gradient(circle at 70% 30%, rgba(240,147,251,0.12) 0%, transparent 80%);
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(40px);
+        opacity: 0.7;
+        animation: glassGlow 18s ease-in-out infinite alternate;
     }
-    
-    .feature-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-        background: rgba(255,255,255,0.12);
-        border-color: rgba(255,255,255,0.3);
+    @keyframes glassGlow {
+        0% { opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { opacity: 0.6; }
     }
-    
-    .glass-input {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-        border-radius: 15px !important;
-        backdrop-filter: blur(10px) !important;
-        color: white !important;
-        font-family: 'Inter', sans-serif !important;
-        padding: 1rem !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .glass-input:focus {
-        border-color: rgba(255,255,255,0.5) !important;
-        box-shadow: 0 0 0 3px rgba(255,255,255,0.1) !important;
-        background: rgba(255,255,255,0.15) !important;
-    }
-    
-    .premium-button {
-        background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1)) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        border-radius: 15px !important;
-        color: white !important;
-        font-family: 'Inter', sans-serif !important;
-        font-weight: 600 !important;
-        padding: 0.8rem 2rem !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        backdrop-filter: blur(10px) !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-        font-size: 0.85rem !important;
-    }
-    
-    .premium-button:hover {
-        transform: translateY(-3px) !important;
-        box-shadow: 0 15px 30px rgba(255,255,255,0.2) !important;
-        background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.2)) !important;
-        border-color: rgba(255,255,255,0.5) !important;
-    }
-    
-    .emotion-indicator {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: 700;
-        margin: 0.5rem;
-        backdrop-filter: blur(10px);
-        border: 1.5px solid #f093fb55;
-        box-shadow: 0 0 10px 2px #f093fb33;
-        transition: all 0.3s ease;
-        letter-spacing: 0.03em;
-        text-shadow: 0 0 6px #fff, 0 0 12px #f093fb44;
-    }
-    
-    .emotion-happy { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
-    .emotion-sad { background: linear-gradient(135deg, #a8edea, #fed6e3); }
-    .emotion-angry { background: linear-gradient(135deg, #ff6b6b, #feca57); }
-    .emotion-excited { background: linear-gradient(135deg, #f093fb, #f5576c); }
-    .emotion-calm { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-    .emotion-neutral { background: linear-gradient(135deg, #667eea, #764ba2); }
-    
-    .result-container {
-        background: rgba(255,255,255,0.05);
-        border-radius: 20px;
-        padding: 2rem;
-        margin: 1rem 0;
-        border: 1px solid rgba(255,255,255,0.1);
-        backdrop-filter: blur(15px);
-        position: relative;
-    }
-    
-    .result-title {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-shadow: 0 0 12px #f093fb99, 0 0 24px #4facfe55;
-        letter-spacing: 0.04em;
-    }
-    
-    .result-content {
-        font-family: 'Inter', sans-serif;
-        font-size: 1rem;
-        line-height: 1.6;
-        color: rgba(255,255,255,0.9);
-        font-weight: 400;
-    }
-    
-    .sparkle-animation {
+    .main-container::before {
+        content: '';
         position: absolute;
-        width: 4px;
-        height: 4px;
-        background: white;
-        border-radius: 50%;
-        animation: sparkle 2s infinite;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(120deg, rgba(255,255,255,0.08) 0%, rgba(76,175,254,0.07) 100%);
+        z-index: 0;
+        pointer-events: none;
+        border-radius: 32px;
+        filter: blur(12px);
     }
-    
-    @keyframes sparkle {
-        0% { opacity: 0; transform: scale(0) rotate(0deg); }
-        50% { opacity: 1; transform: scale(1) rotate(180deg); }
-        100% { opacity: 0; transform: scale(0) rotate(360deg); }
-    }
-    
-    .loading-spinner {
-        border: 3px solid rgba(255,255,255,0.3);
-        border-top: 3px solid white;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        animation: spin 1s linear infinite;
-        margin: 1rem auto;
-    }
-    
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    .mind-map-container {
-        background: rgba(0,0,0,0.3);
-        border-radius: 15px;
-        padding: 1rem;
-        margin: 1rem 0;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .theme-selector {
+    .main-container > * { position: relative; z-index: 1; }
+
+    /* --- Animated Glassy Nebula Overlay --- */
+    .nebula-overlay {
         position: fixed;
-        top: 20px;
-        right: 20px;
-        background: rgba(255,255,255,0.1);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 15px;
-        padding: 1rem;
-        z-index: 1000;
+        top: -10vh; left: -10vw; width: 120vw; height: 120vh;
+        pointer-events: none;
+        z-index: 0;
+        background: radial-gradient(circle at 60% 40%, rgba(76,175,254,0.13) 0%, rgba(240,147,251,0.11) 60%, transparent 100%);
+        filter: blur(80px) saturate(1.7);
+        opacity: 0.8;
+        animation: nebulaMove 44s ease-in-out infinite alternate;
     }
-    
-    .theme-option {
-        display: block;
-        width: 40px;
-        height: 40px;
+    @keyframes nebulaMove {
+        0% { background-position: 0% 0%;}
+        100% { background-position: 100% 100%;}
+    }
+
+    /* --- Extra Glassy Floating Orbs --- */
+    .floating-orbs .orb {
+        box-shadow: 0 0 60px 20px #f093fb44, 0 0 120px 0px #4facfe33;
+        background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(240,147,251,0.18) 70%, transparent 100%);
+        filter: blur(2.5px) brightness(1.2);
+        opacity: 0.8;
+        border: 2px solid rgba(255,255,255,0.18);
+        transition: box-shadow 0.4s;
+    }
+
+    /* --- Cosmic Glassy Particles --- */
+    .floating-particles .particle {
+        background: radial-gradient(circle, #fff 0%, #f093fb 80%, transparent 100%);
+        opacity: 0.95;
+        filter: blur(1.5px) brightness(1.3);
+        animation-duration: 14s;
+        box-shadow: 0 0 18px 4px #f093fb66;
+        border: 1.5px solid rgba(255,255,255,0.18);
+    }
+
+    /* --- Glassy Cosmic Rays Overlay --- */
+    .outer-cosmic-rays {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+        background: repeating-conic-gradient(from 0deg, rgba(240,147,251,0.11) 0deg 10deg, transparent 10deg 20deg);
+        mix-blend-mode: lighten;
+        opacity: 0.32;
+        animation: cosmicRaysSpin 80s linear infinite;
+    }
+    @keyframes cosmicRaysSpin {
+        0% { transform: rotate(0deg);}
+        100% { transform: rotate(360deg);}
+    }
+
+    /* --- Glassy Dreamy Glow Overlay --- */
+    .dreamy-glow {
+        position: fixed;
+        top: -10%;
+        left: -10%;
+        width: 120vw;
+        height: 120vh;
+        pointer-events: none;
+        z-index: 0;
+        background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.16) 0%, rgba(240,147,251,0.13) 40%, transparent 80%),
+                    radial-gradient(circle at 70% 70%, rgba(102,126,234,0.13) 0%, rgba(76,175,254,0.11) 50%, transparent 90%);
+        filter: blur(60px) saturate(1.3);
+        opacity: 0.92;
+        animation: dreamyFade 22s ease-in-out infinite alternate;
+    }
+    @keyframes dreamyFade {
+        0% { opacity: 0.8; }
+        50% { opacity: 1; }
+        100% { opacity: 0.8; }
+    }
+
+    /* --- Glassy Cosmic Glyphs --- */
+    .cosmic-glyph {
+        font-size: 3.2rem;
+        color: rgba(255,255,255,0.18);
+        text-shadow: 0 0 18px #f093fb66, 0 0 36px #4facfe44;
+        filter: blur(0.5px) brightness(1.1);
+        animation: glyphFloat 28s ease-in-out infinite alternate;
+    }
+
+    /* --- Glassy Shooting Stars --- */
+    .shooting-star {
+        background: linear-gradient(180deg, #fff 0%, #f093fb 80%, transparent 100%);
+        opacity: 0.85;
+        border-radius: 2px;
+        box-shadow: 0 0 24px 8px #f093fb55;
+        filter: blur(1.2px) brightness(1.1);
+    }
+
+    /* --- Glassy Dreamy Sparkles --- */
+    .dreamy-sparkle {
+        position: fixed;
+        width: 7px;
+        height: 7px;
+        background: radial-gradient(circle, #fff 0%, #f093fb 80%, transparent 100%);
         border-radius: 50%;
-        margin: 0.5rem 0;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
+        opacity: 0.85;
+        filter: blur(2.5px) brightness(1.5);
+        pointer-events: none;
+        z-index: 999;
+        animation: sparkle 2.8s infinite;
     }
-    
-    .theme-option:hover {
-        transform: scale(1.1);
-        border-color: rgba(255,255,255,0.5);
+    @keyframes sparkle {
+        0% { opacity: 0; transform: scale(0) rotate(0deg);}
+        50% { opacity: 1; transform: scale(1.2) rotate(180deg);}
+        100% { opacity: 0; transform: scale(0) rotate(360deg);}
     }
-    
-    .theme-dreamy { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
-    .theme-neon { background: linear-gradient(135deg, #08fdd8, #9d50bb); }
-    .theme-solar { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
-    .theme-cosmic { background: linear-gradient(135deg, #667eea, #764ba2); }
-    .theme-aurora { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-    
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        margin: 2rem 0;
+
+    /* --- Glassy Cloud Overlays --- */
+    .cosmic-cloud, .dreamy-cloud {
+        filter: blur(60px) brightness(1.3) saturate(1.2);
+        opacity: 0.55;
     }
-    
-    .stat-card {
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.15);
-        border-radius: 15px;
-        padding: 1.5rem;
-        text-align: center;
-        backdrop-filter: blur(10px);
-        transition: all 0.3s ease;
+
+    /* --- Glassy Inputs & Buttons --- */
+    .stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
+        background: rgba(255,255,255,0.18) !important;
+        border: 2px solid #f093fb77 !important;
+        color: #fff !important;
+        border-radius: 18px !important;
+        backdrop-filter: blur(12px) !important;
+        box-shadow: 0 0 18px 4px #f093fb33 !important;
+        transition: background 0.3s;
     }
-    
-    .stat-card:hover {
-        transform: translateY(-5px);
-        background: rgba(255,255,255,0.12);
+    .stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
+        background: rgba(255,255,255,0.23) !important;
+        border-color: #f093fbcc !important;
+        box-shadow: 0 0 0 5px #f093fb44 !important;
     }
-    
-    .stat-number {
-        font-size: 2rem;
-        font-weight: 800;
-        color: white;
-        margin-bottom: 0.5rem;
+    .stButton button, .premium-button {
+        background: linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0.17)) !important;
+        border: 2px solid #f093fbcc !important;
+        border-radius: 18px !important;
+        color: white !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 700 !important;
+        padding: 0.9rem 2.2rem !important;
+        box-shadow: 0 0 28px 6px #f093fb77, 0 0 56px 0px #4facfe44 !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        backdrop-filter: blur(14px) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.07em !important;
+        font-size: 1.05rem !important;
     }
-    
-    .stat-label {
-        font-size: 0.9rem;
-        color: rgba(255,255,255,0.7);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+    .stButton button:hover, .premium-button:hover {
+        transform: translateY(-4px) scale(1.06) !important;
+        box-shadow: 0 0 56px 16px #f093fbcc, 0 0 120px 0px #4facfe77 !important;
+        background: linear-gradient(135deg, rgba(255,255,255,0.38), rgba(255,255,255,0.28)) !important;
+        border-color: #f093fbff !important;
     }
-    
+
     /* Custom Streamlit overrides */
     .stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
         background: rgba(255,255,255,0.08) !important;
@@ -591,6 +451,9 @@ st.markdown("""
     footer {visibility: hidden;}
 </style>
 <!-- Cosmic overlays and floating elements -->
+<div class="nebula-overlay"></div>
+<div class="dreamy-glow"></div>
+<div class="outer-cosmic-rays"></div>
 <div class="cosmic-aurora"></div>
 <div class="cosmic-cloud cloud1"></div>
 <div class="cosmic-cloud cloud2"></div>
@@ -598,7 +461,7 @@ st.markdown("""
 <div class="cosmic-cloud cloud4"></div>
 <div class="cosmic-rays"></div>
 <script>
-for(let i=0;i<12;i++){
+for(let i=0;i<18;i++){
     let s=document.createElement('div');
     s.className='dreamy-sparkle';
     s.style.left=Math.random()*100+'vw';
@@ -606,7 +469,7 @@ for(let i=0;i<12;i++){
     s.style.animationDelay=(Math.random()*7)+'s';
     document.body.appendChild(s);
 }
-for(let i=0;i<3;i++){
+for(let i=0;i<5;i++){
     let s=document.createElement('div');
     s.className='shooting-star';
     s.style.left=(10+Math.random()*80)+'vw';
@@ -614,7 +477,7 @@ for(let i=0;i<3;i++){
     document.body.appendChild(s);
 }
 const glyphs = ['✦','✧','☄','✺','✹','✶','✷','✸','✻','✼','✽','✾','❈','❉','❊','❋','☼','☀','☽','☾'];
-for(let i=0;i<10;i++){
+for(let i=0;i<16;i++){
     let g=document.createElement('div');
     g.className='cosmic-glyph';
     g.innerText=glyphs[Math.floor(Math.random()*glyphs.length)];
@@ -1550,7 +1413,7 @@ st.markdown("""
     font-family: 'Inter', sans-serif !important;
     font-weight: 600 !important;
     padding: 0.8rem 2rem !important;
-    box-shadow: 0 0 18px 2px #f093fb55, 0 0 36px 0px #4facfe33 !important;
+    box-shadow: 0 0 18px 2px #f093fb55, 0 0 36px 0px #4facfe44 !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     backdrop-filter: blur(10px) !important;
     text-transform: uppercase !important;
@@ -1580,10 +1443,720 @@ st.markdown("""
     box-shadow: 0 0 0 3px #f093fb33 !important;
 }
 
+/* Cosmic overlays and floating elements */
+.cosmic-aurora {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(240,147,251,0.10) 0%, rgba(76,175,254,0.09) 40%, rgba(255,255,255,0.07) 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.7;
+    animation: auroraMove 22s ease-in-out infinite alternate;
+}
+@keyframes auroraMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Floating nebula clouds */
+.cosmic-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.35;
+    filter: blur(40px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.cosmic-cloud.cloud1 { width: 340px; height: 180px; top: 8%; left: 4%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.cosmic-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.cosmic-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.cosmic-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Floating glyphs */
+.cosmic-glyph {
+    position: fixed;
+    font-size: 2.7rem;
+    color: rgba(255,255,255,0.13);
+    pointer-events: none;
+    z-index: 999;
+    animation: glyphFloat 22s ease-in-out infinite alternate;
+    text-shadow: 0 0 12px #f093fb44, 0 0 24px #4facfe33;
+}
+@keyframes glyphFloat {
+    0% { transform: translateY(0px) scale(1);}
+    50% { transform: translateY(-40px) scale(1.1);}
+    100% { transform: translateY(0px) scale(1);}
+}
+
+/* Dreamy text glow */
+.hero-title, .result-title, .stat-number {
+    /* Reduced glow for readability */
+    text-shadow: 0 0 3px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
+    letter-spacing: 0.1em;
+}
+
+/* Navigation Bar Glow */
+.navigation-bar {
+    box-shadow: 0 0 24px 4px #f093fb33, 0 0 48px 0px #4facfe22;
+    border: 1.5px solid #f093fb55;
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: blur(12px);
+}
+
+/* Hero Title Glow */
+.hero-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px #fff, 0 0 60px #f093fb, 0 0 20px #4facfe;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(0 0 18px #f093fb88);
+}
+
+/* Magical Button Glow */
+.stButton button, .premium-button {
+    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.13)) !important;
+    border: 1.5px solid #f093fb88 !important;
+    border-radius: 15px !important;
+    color: white !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 2rem !important;
+    box-shadow: 0 0 18px 2px #f093fb55, 0 0 36px 0px #4facfe44 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(10px) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-size: 0.95rem !important;
+}
+.stButton button:hover, .premium-button:hover {
+    transform: translateY(-3px) scale(1.04) !important;
+    box-shadow: 0 0 36px 8px #f093fb99, 0 0 80px 0px #4facfe55 !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.22)) !important;
+    border-color: #f093fbcc !important;
+}
+
+/* Magical Inputs */
+.stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
+    background: rgba(255,255,255,0.13) !important;
+    border: 1.5px solid #f093fb55 !important;
+    color: #fff !important;
+    border-radius: 15px !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 0 10px 2px #f093fb33 !important;
+    transition: background 0.3s;
+}
+.stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
+    background: rgba(255,255,255,0.18) !important;
+    border-color: #f093fb99 !important;
+    box-shadow: 0 0 0 3px #f093fb33 !important;
+}
+
+/* Cosmic overlays and floating elements */
+.cosmic-aurora {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(240,147,251,0.10) 0%, rgba(76,175,254,0.09) 40%, rgba(255,255,255,0.07) 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.7;
+    animation: auroraMove 22s ease-in-out infinite alternate;
+}
+@keyframes auroraMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Floating nebula clouds */
+.cosmic-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.35;
+    filter: blur(40px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.cosmic-cloud.cloud1 { width: 340px; height: 180px; top: 8%; left: 4%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.cosmic-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.cosmic-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.cosmic-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Floating glyphs */
+.cosmic-glyph {
+    position: fixed;
+    font-size: 2.7rem;
+    color: rgba(255,255,255,0.13);
+    pointer-events: none;
+    z-index: 999;
+    animation: glyphFloat 22s ease-in-out infinite alternate;
+    text-shadow: 0 0 12px #f093fb44, 0 0 24px #4facfe33;
+}
+@keyframes glyphFloat {
+    0% { transform: translateY(0px) scale(1);}
+    50% { transform: translateY(-40px) scale(1.1);}
+    100% { transform: translateY(0px) scale(1);}
+}
+
+/* Dreamy text glow */
+.hero-title, .result-title, .stat-number {
+    /* Reduced glow for readability */
+    text-shadow: 0 0 3px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
+    letter-spacing: 0.1em;
+}
+
+/* Navigation Bar Glow */
+.navigation-bar {
+    box-shadow: 0 0 24px 4px #f093fb33, 0 0 48px 0px #4facfe22;
+    border: 1.5px solid #f093fb55;
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: blur(12px);
+}
+
+/* Hero Title Glow */
+.hero-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px #fff, 0 0 60px #f093fb, 0 0 20px #4facfe;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(0 0 18px #f093fb88);
+}
+
+/* Magical Button Glow */
+.stButton button, .premium-button {
+    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.13)) !important;
+    border: 1.5px solid #f093fb88 !important;
+    border-radius: 15px !important;
+    color: white !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 2rem !important;
+    box-shadow: 0 0 18px 2px #f093fb55, 0 0 36px 0px #4facfe44 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(10px) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-size: 0.95rem !important;
+}
+.stButton button:hover, .premium-button:hover {
+    transform: translateY(-3px) scale(1.04) !important;
+    box-shadow: 0 0 36px 8px #f093fb99, 0 0 80px 0px #4facfe55 !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.22)) !important;
+    border-color: #f093fbcc !important;
+}
+
+/* Magical Inputs */
+.stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
+    background: rgba(255,255,255,0.13) !important;
+    border: 1.5px solid #f093fb55 !important;
+    color: #fff !important;
+    border-radius: 15px !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 0 10px 2px #f093fb33 !important;
+    transition: background 0.3s;
+}
+.stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
+    background: rgba(255,255,255,0.18) !important;
+    border-color: #f093fb99 !important;
+    box-shadow: 0 0 0 3px #f093fb33 !important;
+}
+
+/* Cosmic overlays and floating elements */
+.cosmic-aurora {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(240,147,251,0.10) 0%, rgba(76,175,254,0.09) 40%, rgba(255,255,255,0.07) 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.7;
+    animation: auroraMove 22s ease-in-out infinite alternate;
+}
+@keyframes auroraMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Floating nebula clouds */
+.cosmic-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.35;
+    filter: blur(40px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.cosmic-cloud.cloud1 { width: 340px; height: 180px; top: 8%; left: 4%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.cosmic-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.cosmic-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.cosmic-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Floating glyphs */
+.cosmic-glyph {
+    position: fixed;
+    font-size: 2.7rem;
+    color: rgba(255,255,255,0.13);
+    pointer-events: none;
+    z-index: 999;
+    animation: glyphFloat 22s ease-in-out infinite alternate;
+    text-shadow: 0 0 12px #f093fb44, 0 0 24px #4facfe33;
+}
+@keyframes glyphFloat {
+    0% { transform: translateY(0px) scale(1);}
+    50% { transform: translateY(-40px) scale(1.1);}
+    100% { transform: translateY(0px) scale(1);}
+}
+
+/* Dreamy text glow */
+.hero-title, .result-title, .stat-number {
+    /* Reduced glow for readability */
+    text-shadow: 0 0 3px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
+    letter-spacing: 0.1em;
+}
+
+/* Navigation Bar Glow */
+.navigation-bar {
+    box-shadow: 0 0 24px 4px #f093fb33, 0 0 48px 0px #4facfe22;
+    border: 1.5px solid #f093fb55;
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: blur(12px);
+}
+
+/* Hero Title Glow */
+.hero-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px #fff, 0 0 60px #f093fb, 0 0 20px #4facfe;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(0 0 18px #f093fb88);
+}
+
+/* Magical Button Glow */
+.stButton button, .premium-button {
+    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.13)) !important;
+    border: 1.5px solid #f093fb88 !important;
+    border-radius: 15px !important;
+    color: white !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 2rem !important;
+    box-shadow: 0 0 18px 2px #f093fb55, 0 0 36px 0px #4facfe44 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(10px) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-size: 0.95rem !important;
+}
+.stButton button:hover, .premium-button:hover {
+    transform: translateY(-3px) scale(1.04) !important;
+    box-shadow: 0 0 36px 8px #f093fb99, 0 0 80px 0px #4facfe55 !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.22)) !important;
+    border-color: #f093fbcc !important;
+}
+
+/* Magical Inputs */
+.stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
+    background: rgba(255,255,255,0.13) !important;
+    border: 1.5px solid #f093fb55 !important;
+    color: #fff !important;
+    border-radius: 15px !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 0 10px 2px #f093fb33 !important;
+    transition: background 0.3s;
+}
+.stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
+    background: rgba(255,255,255,0.18) !important;
+    border-color: #f093fb99 !important;
+    box-shadow: 0 0 0 3px #f093fb33 !important;
+}
+
+/* Cosmic overlays and floating elements */
+.cosmic-aurora {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(240,147,251,0.10) 0%, rgba(76,175,254,0.09) 40%, rgba(255,255,255,0.07) 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.7;
+    animation: auroraMove 22s ease-in-out infinite alternate;
+}
+@keyframes auroraMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Floating nebula clouds */
+.cosmic-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.35;
+    filter: blur(40px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.cosmic-cloud.cloud1 { width: 340px; height: 180px; top: 8%; left: 4%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.cosmic-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.cosmic-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.cosmic-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Floating glyphs */
+.cosmic-glyph {
+    position: fixed;
+    font-size: 2.7rem;
+    color: rgba(255,255,255,0.13);
+    pointer-events: none;
+    z-index: 999;
+    animation: glyphFloat 22s ease-in-out infinite alternate;
+    text-shadow: 0 0 12px #f093fb44, 0 0 24px #4facfe33;
+}
+@keyframes glyphFloat {
+    0% { transform: translateY(0px) scale(1);}
+    50% { transform: translateY(-40px) scale(1.1);}
+    100% { transform: translateY(0px) scale(1);}
+}
+
+/* Dreamy text glow */
+.hero-title, .result-title, .stat-number {
+    /* Reduced glow for readability */
+    text-shadow: 0 0 3px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
+    letter-spacing: 0.1em;
+}
+
+/* Navigation Bar Glow */
+.navigation-bar {
+    box-shadow: 0 0 24px 4px #f093fb33, 0 0 48px 0px #4facfe22;
+    border: 1.5px solid #f093fb55;
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: blur(12px);
+}
+
+/* Hero Title Glow */
+.hero-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px #fff, 0 0 60px #f093fb, 0 0 20px #4facfe;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(0 0 18px #f093fb88);
+}
+
+/* Magical Button Glow */
+.stButton button, .premium-button {
+    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.13)) !important;
+    border: 1.5px solid #f093fb88 !important;
+    border-radius: 15px !important;
+    color: white !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 2rem !important;
+    box-shadow: 0 0 18px 2px #f093fb55, 0 0 36px 0px #4facfe44 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(10px) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-size: 0.95rem !important;
+}
+.stButton button:hover, .premium-button:hover {
+    transform: translateY(-3px) scale(1.04) !important;
+    box-shadow: 0 0 36px 8px #f093fb99, 0 0 80px 0px #4facfe55 !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.22)) !important;
+    border-color: #f093fbcc !important;
+}
+
+/* Magical Inputs */
+.stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
+    background: rgba(255,255,255,0.13) !important;
+    border: 1.5px solid #f093fb55 !important;
+    color: #fff !important;
+    border-radius: 15px !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 0 10px 2px #f093fb33 !important;
+    transition: background 0.3s;
+}
+.stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
+    background: rgba(255,255,255,0.18) !important;
+    border-color: #f093fb99 !important;
+    box-shadow: 0 0 0 3px #f093fb33 !important;
+}
+
+/* Cosmic overlays and floating elements */
+.cosmic-aurora {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(240,147,251,0.10) 0%, rgba(76,175,254,0.09) 40%, rgba(255,255,255,0.07) 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.7;
+    animation: auroraMove 22s ease-in-out infinite alternate;
+}
+@keyframes auroraMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Floating nebula clouds */
+.cosmic-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.35;
+    filter: blur(40px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.cosmic-cloud.cloud1 { width: 340px; height: 180px; top: 8%; left: 4%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.cosmic-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.cosmic-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.cosmic-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Floating glyphs */
+.cosmic-glyph {
+    position: fixed;
+    font-size: 2.7rem;
+    color: rgba(255,255,255,0.13);
+    pointer-events: none;
+    z-index: 999;
+    animation: glyphFloat 22s ease-in-out infinite alternate;
+    text-shadow: 0 0 12px #f093fb44, 0 0 24px #4facfe33;
+}
+@keyframes glyphFloat {
+    0% { transform: translateY(0px) scale(1);}
+    50% { transform: translateY(-40px) scale(1.1);}
+    100% { transform: translateY(0px) scale(1);}
+}
+
+/* Dreamy text glow */
+.hero-title, .result-title, .stat-number {
+    /* Reduced glow for readability */
+    text-shadow: 0 0 3px #f0f0f0, 0 0 10px #f093fb, 0 0 4px #4facfe;
+    letter-spacing: 0.1em;
+}
+
+/* Navigation Bar Glow */
+.navigation-bar {
+    box-shadow: 0 0 24px 4px #f093fb33, 0 0 48px 0px #4facfe22;
+    border: 1.5px solid #f093fb55;
+    background: rgba(255,255,255,0.13);
+    backdrop-filter: blur(12px);
+}
+
+/* Hero Title Glow */
+.hero-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px #fff, 0 0 60px #f093fb, 0 0 20px #4facfe;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(0 0 18px #f093fb88);
+}
+
+/* Magical Button Glow */
+.stButton button, .premium-button {
+    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.13)) !important;
+    border: 1.5px solid #f093fb88 !important;
+    border-radius: 15px !important;
+    color: white !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 2rem !important;
+    box-shadow: 0 0 18px 2px #f093fb55, 0 0 36px 0px #4facfe44 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(10px) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-size: 0.95rem !important;
+}
+.stButton button:hover, .premium-button:hover {
+    transform: translateY(-3px) scale(1.04) !important;
+    box-shadow: 0 0 36px 8px #f093fb99, 0 0 80px 0px #4facfe55 !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.22)) !important;
+    border-color: #f093fbcc !important;
+}
+
+/* Magical Inputs */
+.stTextInput input, .stTextArea textarea, .stSelectbox select, .stSlider > div {
+    background: rgba(255,255,255,0.13) !important;
+    border: 1.5px solid #f093fb55 !important;
+    color: #fff !important;
+    border-radius: 15px !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 0 10px 2px #f093fb33 !important;
+    transition: background 0.3s;
+}
+.stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
+    background: rgba(255,255,255,0.18) !important;
+    border-color: #f093fb99 !important;
+    box-shadow: 0 0 0 3px #f093fb33 !important;
+}
+
+/* Cosmic overlays and floating elements */
+.cosmic-aurora {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(120deg, rgba(240,147,251,0.10) 0%, rgba(76,175,254,0.09) 40%, rgba(255,255,255,0.07) 100%);
+    mix-blend-mode: lighten;
+    opacity: 0.7;
+    animation: auroraMove 22s ease-in-out infinite alternate;
+}
+@keyframes auroraMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Floating nebula clouds */
+.cosmic-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.35;
+    filter: blur(40px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.cosmic-cloud.cloud1 { width: 340px; height: 180px; top: 8%; left: 4%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.cosmic-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.cosmic-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.cosmic-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Floating glyphs */
+.cosmic-glyph {
+    position: fixed;
+    font-size: 2.7rem;
+    color: rgba(255,255,255,0.13);
+    pointer-events: none;
+    z-index: 999;
+    animation: glyphFloat 22s ease-in-out infinite alternate;
+    text-shadow: 0 0 12px #f093fb44, 0 0 24px #4facfe33;
+}
+@keyframes glyphFloat {
+    0% { transform: translateY(0px) scale(1);}
+    50% { transform: translateY(-40px) scale(1.1);}
+    100% { transform: translateY(0px) scale(1);}
+}
+
+/* Dreamy, ethereal overlays and glows */
+.dreamy-glow {
+    position: fixed;
+    top: -10%;
+    left: -10%;
+    width: 120vw;
+    height: 120vh;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, rgba(240,147,251,0.10) 40%, transparent 80%),
+                radial-gradient(circle at 70% 70%, rgba(102,126,234,0.10) 0%, rgba(76,175,254,0.08) 50%, transparent 90%);
+    filter: blur(40px) saturate(1.2);
+    opacity: 0.85;
+    animation: dreamyFade 18s ease-in-out infinite alternate;
+}
+@keyframes dreamyFade {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+/* Subtle floating nebula clouds */
+.dreamy-cloud {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.45;
+    filter: blur(30px) brightness(1.2);
+    animation: floatCloud 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+.dreamy-cloud.cloud1 { width: 320px; height: 180px; top: 10%; left: 5%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); animation-delay: 0s;}
+.dreamy-cloud.cloud2 { width: 220px; height: 120px; top: 60%; left: 70%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); animation-delay: 8s;}
+.dreamy-cloud.cloud3 { width: 180px; height: 100px; top: 80%; left: 20%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); animation-delay: 16s;}
+.dreamy-cloud.cloud4 { width: 260px; height: 140px; top: 20%; left: 60%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); animation-delay: 12s;}
+@keyframes floatCloud {
+    0% { transform: translateY(0px) scale(1) rotate(0deg);}
+    50% { transform: translateY(-30px) scale(1.05) rotate(3deg);}
+    100% { transform: translateY(0px) scale(1) rotate(0deg);}
+}
+
+/* Floating particles override for more shimmer */
+.floating-particles .particle {
+    background: radial-gradient(circle, #fff 0%, #f093fb 80%, transparent 100%);
+    opacity: 0.8;
+    filter: blur(0.5px) brightness(1.2);
+    animation-duration: 18s;
+    box-shadow: 0 0 8px 2px #f093fb55;
+}
+
 /* --- Hide Streamlit watermark --- */
 footer {visibility: hidden;}
 </style>
 <!-- Cosmic overlays and floating elements -->
+<div class="nebula-overlay"></div>
+<div class="dreamy-glow"></div>
+<div class="outer-cosmic-rays"></div>
 <div class="cosmic-aurora"></div>
 <div class="cosmic-cloud cloud1"></div>
 <div class="cosmic-cloud cloud2"></div>
@@ -1591,7 +2164,7 @@ footer {visibility: hidden;}
 <div class="cosmic-cloud cloud4"></div>
 <div class="cosmic-rays"></div>
 <script>
-for(let i=0;i<12;i++){
+for(let i=0;i<18;i++){
     let s=document.createElement('div');
     s.className='dreamy-sparkle';
     s.style.left=Math.random()*100+'vw';
@@ -1599,7 +2172,7 @@ for(let i=0;i<12;i++){
     s.style.animationDelay=(Math.random()*7)+'s';
     document.body.appendChild(s);
 }
-for(let i=0;i<3;i++){
+for(let i=0;i<5;i++){
     let s=document.createElement('div');
     s.className='shooting-star';
     s.style.left=(10+Math.random()*80)+'vw';
@@ -1607,7 +2180,7 @@ for(let i=0;i<3;i++){
     document.body.appendChild(s);
 }
 const glyphs = ['✦','✧','☄','✺','✹','✶','✷','✸','✻','✼','✽','✾','❈','❉','❊','❋','☼','☀','☽','☾'];
-for(let i=0;i<10;i++){
+for(let i=0;i<16;i++){
     let g=document.createElement('div');
     g.className='cosmic-glyph';
     g.innerText=glyphs[Math.floor(Math.random()*glyphs.length)];
