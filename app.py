@@ -1098,7 +1098,7 @@ def main():
                     nx.draw_networkx_nodes(G, pos, node_color="#f093fb", node_size=700, alpha=0.8, ax=ax)
                     nx.draw_networkx_edges(G, pos, edge_color="#764ba2", width=2, alpha=0.5, ax=ax)
                     nx.draw_networkx_labels(G, pos, font_color="white", font_weight="bold", font_family="sans-serif", ax=ax)
-                    ax.set_axis_off()
+                    ax.set_axis_off();
                     st.markdown('<div class="mind-map-container">', unsafe_allow_html=True)
                     st.pyplot(fig)
                     st.markdown('</div>', unsafe_allow_html=True)
@@ -1367,15 +1367,17 @@ def main():
                     # Visualization if CSV
                     chart_html = ""
                     if synth_mode in ["Auto", "Data (CSV)"]:
-                        try:
+                        try {
                             df = pd.read_csv(pd.compat.StringIO(synth_text))
                             fig = px.line(df) if len(df.columns) >= 2 else None
                             if fig:
                                 st.plotly_chart(fig, use_container_width=True)
                                 chart_html = "<div style='margin-top:1em;'>Chart generated from your data above.</div>"
-                        except Exception:
-                            if synth_mode == "Data (CSV)":
+                        } catch (Exception) {
+                            if synth_mode == "Data (CSV)" {
                                 st.warning("Could not parse CSV for visualization.")
+                            }
+                        }
                     st.markdown(f"""
                     <div class="result-container">
                         <div class="result-title">🛰️ SynthAI Results</div>
@@ -1415,8 +1417,8 @@ def main():
             if user_prompt:
                 with st.spinner("Generating response..."):
                     # Try to use system prompt and temperature if supported, else fallback
-                    try:
-                        if model and hasattr(model, "generate_content"):
+                    try {
+                        if model && hasattr(model, "generate_content") {
                             # If the model supports temperature/system prompt, use them
                             response = model.generate_content(
                                 user_prompt,
@@ -1424,11 +1426,12 @@ def main():
                                 
                             )
                             result = response.text
-                        else:
+                        } else {
                             # Fallback: concatenate system prompt
                             prompt = (system_prompt + "\n" if system_prompt else "") + user_prompt
                             result = generate_response(prompt)
-                    except Exception as e:
+                        }
+                    } catch (Exception as e) {
                         result = f"Error: {e}"
                     st.markdown(f"""
                     <div class="result-container">
@@ -1452,397 +1455,133 @@ if __name__ == "__main__":
 
 st.markdown("""
 <style>
-/* === COSMIC FOUNDATION === */
-.cosmic-aurora {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    pointer-events: none; z-index: 0;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
-        linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(30, 0, 50, 0.95) 100%);
-    animation: cosmicPulse 25s ease-in-out infinite alternate;
-}
-@keyframes cosmicPulse {
-    0% { opacity: 0.8; transform: scale(1) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.02) rotate(0.5deg); }
-    100% { opacity: 0.9; transform: scale(1) rotate(0deg); }
-}
-
-/* === ETHEREAL PARTICLES === */
-.particle {
-    position: absolute;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: particleFloat 20s linear infinite;
-    z-index: 1;
-}
-@keyframes particleFloat {
-    0% { transform: translateY(100vh) scale(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-}
-
-/* === NEBULA CLOUDS === */
-.nebula {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    filter: blur(60px) brightness(1.4);
-    animation: nebulaDrift 40s ease-in-out infinite alternate;
-    z-index: 1;
-}
-.nebula.n1 { 
-    width: 400px; height: 200px; top: 10%; left: 5%; 
-    background: radial-gradient(ellipse, rgba(138, 43, 226, 0.4) 0%, rgba(75, 0, 130, 0.3) 50%, transparent 100%);
-    animation-delay: 0s;
-}
-.nebula.n2 { 
-    width: 300px; height: 150px; top: 70%; left: 65%; 
-    background: radial-gradient(ellipse, rgba(255, 20, 147, 0.35) 0%, rgba(199, 21, 133, 0.25) 50%, transparent 100%);
-    animation-delay: 8s;
-}
-.nebula.n3 { 
-    width: 250px; height: 125px; top: 25%; left: 75%; 
-    background: radial-gradient(ellipse, rgba(0, 191, 255, 0.3) 0%, rgba(30, 144, 255, 0.2) 50%, transparent 100%);
-    animation-delay: 16s;
-}
-.nebula.n4 { 
-    width: 350px; height: 175px; top: 85%; left: 15%; 
-    background: radial-gradient(ellipse, rgba(255, 215, 0, 0.25) 0%, rgba(255, 140, 0, 0.15) 50%, transparent 100%);
-    animation-delay: 24s;
-}
-@keyframes nebulaDrift {
-    0% { transform: translateY(0px) scale(1) rotate(0deg); }
-    50% { transform: translateY(-40px) scale(1.1) rotate(5deg); }
-    100% { transform: translateY(0px) scale(1) rotate(0deg); }
-}
-
-/* === STELLAR GLYPHS === */
-.stellar-glyph {
-    position: fixed;
-    font-size: 3rem;
-    color: rgba(255, 255, 255, 0.15);
-    pointer-events: none;
-    z-index: 999;
-    animation: stellarPulse 30s ease-in-out infinite alternate;
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.5),
-        0 0 20px rgba(138, 43, 226, 0.3),
-        0 0 30px rgba(255, 20, 147, 0.2);
-    font-family: 'Arial Unicode MS', sans-serif;
-}
-@keyframes stellarPulse {
-    0% { transform: translateY(0px) scale(1) rotate(0deg); opacity: 0.1; }
-    50% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0.3; }
-    100% { transform: translateY(0px) scale(1) rotate(0deg); opacity: 0.1; }
-}
-
-/* === SHOOTING STARS === */
-.shooting-star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: linear-gradient(90deg, #fff, transparent);
-    border-radius: 50%;
-    animation: shootingStar 3s ease-out infinite;
-    z-index: 2;
-}
-@keyframes shootingStar {
-    0% {
-        transform: translateX(-100px) translateY(0px);
-        opacity: 0;
-        width: 2px;
-    }
-    10% {
-        opacity: 1;
-        width: 100px;
-    }
-    90% {
-        opacity: 1;
-        width: 100px;
-    }
-    100% {
-        transform: translateX(100vw) translateY(200px);
-        opacity: 0;
-        width: 2px;
-    }
-}
-
-/* === DIMENSIONAL SPARKLES === */
-.dimensional-sparkle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: dimensionalSparkle 8s ease-in-out infinite;
-    z-index: 10;
-}
-@keyframes dimensionalSparkle {
-    0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
-    50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
-}
-
-/* === HERO TITLE === */
-.hero-title {
-    font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 5rem;
-    font-weight: 900;
-    background: linear-gradient(45deg, 
-        #ffffff 0%, 
-        #e0e7ff 20%, 
-        #c7d2fe 40%, 
-        #a5b4fc 60%, 
-        #8b5cf6 80%, 
-        #7c3aed 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 
-        0 0 40px rgba(255, 255, 255, 0.5),
-        0 0 80px rgba(139, 92, 246, 0.3),
-        0 0 120px rgba(124, 58, 237, 0.2);
-    margin-bottom: 2rem;
-    letter-spacing: -0.03em;
-    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
-    animation: heroGlow 4s ease-in-out infinite alternate;
-}
-@keyframes heroGlow {
-    0% { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4)); }
-    100% { filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.6)); }
-}
-
-/* === MYSTICAL BUTTONS === */
-.stButton button, .mystical-button {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1) 0%, 
-        rgba(139, 92, 246, 0.2) 50%, 
-        rgba(124, 58, 237, 0.1) 100%) !important;
-    border: 2px solid transparent !important;
-    border-radius: 20px !important;
-    color: white !important;
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 700 !important;
-    padding: 1rem 2.5rem !important;
-    position: relative !important;
-    backdrop-filter: blur(15px) !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.1em !important;
-    font-size: 0.9rem !important;
-    overflow: hidden !important;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 
-        0 0 20px rgba(139, 92, 246, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-}
-.stButton button::before, .mystical-button::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(139, 92, 246, 0.6) 0%, 
-        rgba(124, 58, 237, 0.4) 100%);
-    border-radius: 18px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-}
-.stButton button:hover, .mystical-button:hover {
-    transform: translateY(-4px) scale(1.05) !important;
-    box-shadow: 
-        0 0 40px rgba(139, 92, 246, 0.5),
-        0 10px 40px rgba(139, 92, 246, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-}
-.stButton button:hover::before, .mystical-button:hover::before {
-    opacity: 1;
-}
-
-/* === ETHEREAL INPUTS === */
-.stTextInput input, .stTextArea textarea, .stSelectbox select {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 2px solid rgba(139, 92, 246, 0.3) !important;
+/* === FIX TEXT VISIBILITY AND PREVENT FADING === */
+body, .stApp, .stMarkdown, .sidebar-guide, .sidebar-guide li, .sidebar-guide h4,
+h1, h2, h3, h4, h5, h6, .hero-title, .hero-subtitle, .result-title, .result-content,
+.stTextInput label, .stTextArea label, .stSelectbox label, .stat-number, .emotion-indicator,
+.stButton button, .mystical-button, .feature-card, .result-container, .cosmic-card {
     color: #fff !important;
-    border-radius: 15px !important;
-    backdrop-filter: blur(10px) !important;
-    box-shadow: 
-        0 0 20px rgba(139, 92, 246, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-    transition: all 0.3s ease !important;
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 500 !important;
-}
-.stTextInput input:focus, .stTextArea textarea:focus, .stSelectbox select:focus {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(139, 92, 246, 0.6) !important;
-    box-shadow: 
-        0 0 30px rgba(139, 92, 246, 0.4),
-        0 0 0 4px rgba(139, 92, 246, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    filter: none !important;
 }
 
-/* === NAVIGATION BAR === */
-.navigation-bar {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(139, 92, 246, 0.3) !important;
-    border-radius: 25px !important;
-    box-shadow: 
-        0 0 30px rgba(139, 92, 246, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-    padding: 1rem 2rem !important;
-    margin-bottom: 2rem !important;
+.stMarkdown, .sidebar-guide, .sidebar-guide li, .sidebar-guide h4 {
+    color: #fff !important;
+    opacity: 1 !important;
 }
 
-/* === CARDS & CONTAINERS === */
-.cosmic-card {
-    background: rgba(255, 255, 255, 0.06) !important;
-    backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(139, 92, 246, 0.25) !important;
-    border-radius: 20px !important;
-    box-shadow: 
-        0 0 25px rgba(139, 92, 246, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-    padding: 2rem !important;
-    margin: 1rem 0 !important;
-    transition: all 0.3s ease !important;
-}
-.cosmic-card:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 
-        0 0 40px rgba(139, 92, 246, 0.25),
-        0 10px 30px rgba(139, 92, 246, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+.hero-title, .hero-subtitle {
+    color: #fff !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #fff !important;
+    background: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    animation: none !important;
 }
 
-/* === METRICS & STATS === */
+.result-title, .result-content {
+    color: #fff !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    filter: none !important;
+}
+
+.emotion-indicator {
+    color: #fff !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    filter: none !important;
+       animation: none !important;
+}
+
+.sidebar-guide, .sidebar-guide li, .sidebar-guide h4 {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
+.stTextInput input, .stTextArea textarea, .stSelectbox select {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
+.stButton button, .mystical-button {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
 .stat-number {
-    font-size: 3rem !important;
-    font-weight: 900 !important;
-    background: linear-gradient(45deg, #fff, #8b5cf6, #7c3aed) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5) !important;
-    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3)) !important;
+    color: #fff !important;
+    opacity: 1 !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #fff !important;
+    background-clip: unset !important;
+    text-shadow: none !important;
+    filter: none !important;
 }
 
-/* === HIDE STREAMLIT ELEMENTS === */
-footer {visibility: hidden;}
-.stDeployButton {visibility: hidden;}
-header[data-testid="stHeader"] {visibility: hidden;}
-.stActionButton {visibility: hidden;}
-div[data-testid="stToolbar"] {visibility: hidden;}
-.stSelectbox label {color: rgba(255, 255, 255, 0.8) !important;}
-.stTextInput label {color: rgba(255, 255, 255, 0.8) !important;}
-.stTextArea label {color: rgba(255, 255, 255, 0.8) !important;}
+h1, h2, h3, h4, h5, h6 {
+    color: #fff !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    animation: none !important;
+}
 
-/* === RESPONSIVE DESIGN === */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 3rem !important;
-    }
-    .nebula {
-        width: 200px !important;
-        height: 100px !important;
-    }
-    .stellar-glyph {
-        font-size: 2rem !important;
-    }
+/* Remove any text fade animation */
+@keyframes titleGlow { 0% { filter: none; } 100% { filter: none; } }
+@keyframes heroGlow { 0% { filter: none; } 100% { filter: none; } }
+@keyframes emotionPulse { 0% { box-shadow: none; } 100% { box-shadow: none; } }
+@keyframes constellationPulse { 0% { opacity: 1; filter: none; } 50% { opacity: 1; filter: none; } 100% { opacity: 1; filter: none; } }
+
+/* Remove fading from .hero-title and .hero-subtitle */
+.hero-title, .hero-subtitle {
+    animation: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+/* Remove fading from .emotion-indicator */
+.emotion-indicator {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
+/* Remove fading from .result-title and .result-content */
+.result-title, .result-content {
+    opacity: 1 !important;
+    filter: none !important;
+    animation: none !important;
+}
+
+/* Remove fading from .sidebar-guide */
+.sidebar-guide, .sidebar-guide li, .sidebar-guide h4 {
+    opacity: 1 !important;
+    filter: none !important;
+    animation: none !important;
+}
+
+/* Remove fading from .stat-number */
+.stat-number {
+    opacity: 1 !important;
+    filter: none !important;
+    animation: none !important;
+}
+
+/* Remove fading from .feature-card and .result-container */
+.feature-card, .result-container {
+    opacity: 1 !important;
+    filter: none !important;
+    animation: none !important;
+}
+
+/* Remove fading from .cosmic-card */
+.cosmic-card {
+    opacity: 1 !important;
+    filter: none !important;
+    animation: none !important;
 }
 </style>
-
-<!-- Cosmic Foundation -->
-<div class="cosmic-aurora"></div>
-
-<!-- Nebula Clouds -->
-<div class="nebula n1"></div>
-<div class="nebula n2"></div>
-<div class="nebula n3"></div>
-<div class="nebula n4"></div>
-
-<script>
-// Generate ethereal particles
-for(let i = 0; i < 15; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.width = (Math.random() * 4 + 2) + 'px';
-    particle.style.height = particle.style.width;
-    particle.style.left = Math.random() * 100 + 'vw';
-    particle.style.animationDelay = Math.random() * 20 + 's';
-    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-    document.body.appendChild(particle);
-}
-
-// Generate shooting stars
-for(let i = 0; i < 5; i++) {
-    const star = document.createElement('div');
-    star.className = 'shooting-star';
-    star.style.left = (Math.random() * 100) + 'vw';
-    star.style.top = (Math.random() * 50) + 'vh';
-    star.style.animationDelay = Math.random() * 10 + 's';
-    star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    document.body.appendChild(star);
-}
-
-// Generate dimensional sparkles
-for(let i = 0; i < 25; i++) {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'dimensional-sparkle';
-    sparkle.style.left = Math.random() * 100 + 'vw';
-    sparkle.style.top = Math.random() * 100 + 'vh';
-    sparkle.style.animationDelay = Math.random() * 8 + 's';
-    sparkle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-    document.body.appendChild(sparkle);
-}
-
-// Generate stellar glyphs
-const stellarGlyphs = ['✦','✧','☄','✺','✹','✶','✷','✸','✻','✼','✽','✾','❈','❉','❊','❋','☼','☀','☽','☾','⭐','🌟','💫','⚡','🔮','🌙','🌠','✨','💎','🔯','🎇','🎆','🌌','🪐','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔'];
-for(let i = 0; i < 15; i++) {
-    const glyph = document.createElement('div');
-    glyph.className = 'stellar-glyph';
-    glyph.innerText = stellarGlyphs[Math.floor(Math.random() * stellarGlyphs.length)];
-    glyph.style.left = Math.random() * 100 + 'vw';
-    glyph.style.top = Math.random() * 100 + 'vh';
-    glyph.style.animationDelay = Math.random() * 30 + 's';
-    glyph.style.animationDuration = (Math.random() * 10 + 25) + 's';
-    document.body.appendChild(glyph);
-}
-
-// Dynamic color shifting for aurora
-setInterval(() => {
-    const aurora = document.querySelector('.cosmic-aurora');
-    if (aurora) {
-        const colors = [
-            'radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%)',
-            'radial-gradient(circle at 30% 70%, rgba(255, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(120, 219, 255, 0.3) 0%, transparent 50%)',
-            'radial-gradient(circle at 40% 60%, rgba(120, 219, 255, 0.3) 0%, transparent 50%), radial-gradient(circle at 60% 40%, rgba(147, 51, 234, 0.3) 0%, transparent 50%)'
-        ];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        aurora.style.background = randomColor + ', linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(30, 0, 50, 0.95) 100%)';
-    }
-}, 15000);
-
-// Add interactive sparkle trail on mouse move
-document.addEventListener('mousemove', (e) => {
-    if (Math.random() < 0.1) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'dimensional-sparkle';
-        sparkle.style.left = e.clientX + 'px';
-        sparkle.style.top = e.clientY + 'px';
-        sparkle.style.position = 'fixed';
-        sparkle.style.pointerEvents = 'none';
-        sparkle.style.zIndex = '9999';
-        document.body.appendChild(sparkle);
-        
-        setTimeout(() => {
-            sparkle.remove();
-        }, 2000);
-    }
-});
-</script>
 """, unsafe_allow_html=True)
