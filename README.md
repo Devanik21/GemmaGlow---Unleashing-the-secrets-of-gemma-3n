@@ -10,7 +10,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-F093FB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
 [![License](https://img.shields.io/badge/License-MIT-A786DF?style=for-the-badge)](LICENSE)
 
-### 🌸 *My Most Beautiful App Creation* 🌸
+### 🌸 *My Most Stylish App Creation* 🌸
 
 *Where aesthetics meets intelligence in perfect harmony*
 
