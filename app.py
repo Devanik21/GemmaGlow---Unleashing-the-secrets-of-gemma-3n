@@ -1367,17 +1367,15 @@ def main():
                     # Visualization if CSV
                     chart_html = ""
                     if synth_mode in ["Auto", "Data (CSV)"]:
-                        try {
+                        try:
                             df = pd.read_csv(pd.compat.StringIO(synth_text))
                             fig = px.line(df) if len(df.columns) >= 2 else None
                             if fig:
                                 st.plotly_chart(fig, use_container_width=True)
                                 chart_html = "<div style='margin-top:1em;'>Chart generated from your data above.</div>"
-                        } catch (Exception) {
-                            if synth_mode == "Data (CSV)" {
+                        except Exception:
+                            if synth_mode == "Data (CSV)":
                                 st.warning("Could not parse CSV for visualization.")
-                            }
-                        }
                     st.markdown(f"""
                     <div class="result-container">
                         <div class="result-title">🛰️ SynthAI Results</div>
@@ -1416,22 +1414,21 @@ def main():
         if st.button("🧪 Run PromptLab", key="promptlab_btn"):
             if user_prompt:
                 with st.spinner("Generating response..."):
-                    # Try to use system prompt and temperature if supported, else fallback
-                    try {
-                        if model && hasattr(model, "generate_content") {
-                            # If the model supports temperature/system prompt, use them
+                    result = ""
+                    try:
+                        # If the model supports temperature/system prompt, use them
+                        if model and hasattr(model, "generate_content"):
+                            prompt = (system_prompt + "\n" if system_prompt else "") + user_prompt
                             response = model.generate_content(
-                                user_prompt,
-                                generation_config={"temperature": temperature},
-                                
+                                prompt,
+                                generation_config={"temperature": temperature}
                             )
                             result = response.text
-                        } else {
+                        else:
                             # Fallback: concatenate system prompt
                             prompt = (system_prompt + "\n" if system_prompt else "") + user_prompt
                             result = generate_response(prompt)
-                        }
-                    } catch (Exception as e) {
+                    except Exception as e:
                         result = f"Error: {e}"
                     st.markdown(f"""
                     <div class="result-container">
