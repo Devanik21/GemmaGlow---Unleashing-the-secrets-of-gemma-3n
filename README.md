@@ -210,7 +210,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 💎 **Experience the Magic**
 
-*[Try GemmaGlow Live](your-deployed-app-link)* | *[Report Bug](https://github.com/Devanik21/GemmaGlow---Unleashing-the-secrets-of-gemma-3n/issues)* | *[Request Feature](https://github.com/Devanik21/GemmaGlow---Unleashing-the-secrets-of-gemma-3n/issues)*
+*[Try GemmaGlow Live]([your-deployed-app-link](https://sgcn2crcnywk5x7dexz9gy.streamlit.app/))* | *[Report Bug](https://github.com/Devanik21/GemmaGlow---Unleashing-the-secrets-of-gemma-3n/issues)* | *[Request Feature](https://github.com/Devanik21/GemmaGlow---Unleashing-the-secrets-of-gemma-3n/issues)*
 
 ---
 
