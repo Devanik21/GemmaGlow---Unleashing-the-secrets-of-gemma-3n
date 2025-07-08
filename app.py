@@ -1428,7 +1428,7 @@ def main():
                             response = model.generate_content(
                                 user_prompt,
                                 generation_config={"temperature": temperature},
-                                system_instruction=system_prompt if system_prompt else None
+                                
                             )
                             result = response.text
                         else:
