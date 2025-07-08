@@ -3,7 +3,7 @@
 
 <div align="center">
 
-![Banner](https://via.placeholder.com/1200x300/232946/ffffff?text=GemmaGlow+✨+Next-Generation+AI+Companion)
+
 
 [![Made with Streamlit](https://img.shields.io/badge/Made%20with-Streamlit-FF6B6B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Powered by Gemma](https://img.shields.io/badge/Powered%20by-Gemma%203n-4FACFE?style=for-the-badge&logo=google&logoColor=white)](https://deepmind.google/technologies/gemma/)
