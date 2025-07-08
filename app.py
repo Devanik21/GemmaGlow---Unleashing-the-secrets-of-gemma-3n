@@ -16,7 +16,7 @@ import random
 
 # Configure page
 st.set_page_config(
-    page_title="GemmaGlow ✨",
+    page_title="GemmaGlow",
     page_icon="💎",
     layout="wide",
     initial_sidebar_state="expanded"  # changed from "collapsed" to "expanded"
