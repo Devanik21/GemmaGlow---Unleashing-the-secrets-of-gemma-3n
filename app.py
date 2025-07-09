@@ -1281,7 +1281,7 @@ def main():
                     st.markdown(
                         f"""
                         <div style="display: flex; align-items: flex-start; justify-content: flex-end; margin-bottom: 1rem;">
-                            <div style="background: #3b3b3b; color: white; border-radius: 20px; padding: 10px 15px; max-width: 70%; display: flex; align-items: center;">
+                            <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 20px; padding: 10px 15px; max-width: 70%; display: flex; align-items: center;">
                                 <div>{msg['content']}</div>
                                 <div style="margin-left: 10px; font-size: 1.5rem;">🧑</div>
                             </div>
@@ -1293,7 +1293,7 @@ def main():
                     st.markdown(
                         f"""
                         <div style="display: flex; align-items: flex-start; margin-bottom: 1rem;">
-                            <div style="background: #5b5b5b; color: white; border-radius: 20px; padding: 10px 15px; max-width: 70%; display: flex; align-items: center;">
+                            <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 20px; padding: 10px 15px; max-width: 70%; display: flex; align-items: center;">
                                 <div style="margin-right: 10px; font-size: 1.5rem;">🤖</div>
                                 <div>{msg['content']}</div>
                             </div>
@@ -1709,4 +1709,3 @@ h1, h2, h3, h4, h5, h6 {
 }
 </style>
 """, unsafe_allow_html=True)
-
