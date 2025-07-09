@@ -1262,52 +1262,80 @@ def main():
                     """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # Feature 17: WonderWall - AI Curiosity Wall
+    # Feature 17: AI Chat
     with tab17:
-        st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🪐 WonderWall - Ask Anything Cosmic")
-        
-        # Initialize chat history in session state
-        if "wonderwall_chat" not in st.session_state:
-            st.session_state["wonderwall_chat"] = [
-                {"role": "ai", "content": "Welcome to WonderWall! Ask your cosmic questions and I'll answer with awe and wonder."}
+        st.markdown('<div class="feature-card" style="height: 80vh; display: flex; flex-direction: column;">', unsafe_allow_html=True)
+        st.markdown("### 🤖 AI Chat - Your General Assistant")
+
+        # Initialize chat history
+        if "chat_history" not in st.session_state:
+            st.session_state["chat_history"] = [
+                {"role": "ai", "content": "Hello! I'm your AI assistant. How can I help you today?"}
             ]
 
-        # Display chat history
-        for msg in st.session_state["wonderwall_chat"]:
-            if msg["role"] == "user":
-                st.markdown(
-                    f"<div class='result-container' style='background:rgba(0,0,0,0.18);margin-bottom:0.5em;'><b>🧑 You:</b><br>{msg['content']}</div>",
-                    unsafe_allow_html=True
-                )
-            else:
-                st.markdown(
-                    f"<div class='result-container' style='background:rgba(255,255,255,0.08);margin-bottom:0.5em;'><b>🪐 Cosmic AI:</b><br>{msg['content']}</div>",
-                    unsafe_allow_html=True
-                )
+        # Chat container
+        chat_container = st.container()
+        with chat_container:
+            for i, msg in enumerate(st.session_state["chat_history"]):
+                if msg["role"] == "user":
+                    st.markdown(
+                        """
+                        <div style="display: flex; align-items: flex-start; justify-content: flex-end; margin-bottom: 1rem;">
+                            <div style="background: #3b3b3b; color: white; border-radius: 20px; padding: 10px 15px; max-width: 70%;">
+                                {msg['content']}
+                            </div>
+                            <div style="margin-left: 10px; font-size: 1.5rem;">🧑</div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+                else:
+                    st.markdown(
+                        """
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 1rem;">
+                            <div style="margin-right: 10px; font-size: 1.5rem;">🤖</div>
+                            <div style="background: #5b5b5b; color: white; border-radius: 20px; padding: 10px 15px; max-width: 70%;">
+                                {msg['content']}
+                            </div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
 
-        # Input for new user message
-        wonder_q = st.text_input(
-            "Ask your cosmic question:",
-            placeholder="Why do we dream? What is dark matter?...",
-            key="wonder_q"
-        )
-        send_btn = st.button("🌠 Send", key="wonder_send_btn")
+        # Input form
+        with st.form(key="chat_form", clear_on_submit=True):
+            col1, col2 = st.columns([4, 1])
+            with col1:
+                user_input = st.text_input(
+                    "Your message:",
+                    placeholder="Ask me anything...",
+                    key="chat_input",
+                    label_visibility="collapsed"
+                )
+            with col2:
+                submit_button = st.form_submit_button(label="Send")
 
-        if send_btn and wonder_q:
-            # Append user message
-            st.session_state["wonderwall_chat"].append({"role": "user", "content": wonder_q})
-            # Build conversation context
-            context = ""
-            for msg in st.session_state["wonderwall_chat"]:
-                prefix = "User:" if msg["role"] == "user" else "AI:"
-                context += f"{prefix} {msg['content']}\n"
+        if submit_button and user_input:
+            # Add user message to chat history
+            st.session_state["chat_history"].append({"role": "user", "content": user_input})
+
+            # Keep the last 10 messages for context
+            context_messages = st.session_state["chat_history"][-10:]
+            context = "\n".join([f"{'User' if msg['role'] == 'user' else 'AI'}: {msg['content']}" for msg in context_messages])
+
             # Generate AI response
-            with st.spinner("Listening to the universe..."):
-                answer = generate_response(
-                    f"Continue this cosmic conversation. Respond in a cosmic, awe-inspiring way to the user's latest question.\n\n{context}"
-                )
-            st.session_state["wonderwall_chat"].append({"role": "ai", "content": answer})
+            with st.spinner("Thinking..."):
+                ai_response = generate_response(f"Continue this conversation:\n\n{context}")
+            
+            # Add AI response to chat history
+            st.session_state["chat_history"].append({"role": "ai", "content": ai_response})
+            st.experimental_rerun()
+
+        # Clear chat button
+        if st.button("Clear Chat"):
+            st.session_state["chat_history"] = [
+                {"role": "ai", "content": "Hello! I'm your AI assistant. How can I help you today?"}
+            ]
             st.experimental_rerun()
 
         st.markdown('</div>', unsafe_allow_html=True)
