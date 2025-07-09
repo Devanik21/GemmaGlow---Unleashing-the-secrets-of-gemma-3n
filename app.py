@@ -13,6 +13,7 @@ from datetime import datetime
 import base64
 from io import BytesIO
 import random
+import io  # <-- Add this import
 
 # Configure page
 st.set_page_config(
@@ -1307,7 +1308,7 @@ def main():
                     f"Continue this cosmic conversation. Respond in a cosmic, awe-inspiring way to the user's latest question.\n\n{context}"
                 )
             st.session_state["wonderwall_chat"].append({"role": "ai", "content": answer})
-            st.rerun()
+            st.experimental_rerun()
 
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -1353,7 +1354,7 @@ def main():
         if st.button("📊 Visualize", key="dataviz_btn"):
             if data_input:
                 try:
-                    df = pd.read_csv(pd.compat.StringIO(data_input))
+                    df = pd.read_csv(io.StringIO(data_input))  # <-- Fix here
                     if chart_type == "Line":
                         fig = px.line(df)
                     elif chart_type == "Bar":
@@ -1401,7 +1402,7 @@ def main():
                     chart_html = ""
                     if synth_mode in ["Auto", "Data (CSV)"]:
                         try:
-                            df = pd.read_csv(pd.compat.StringIO(synth_text))
+                            df = pd.read_csv(io.StringIO(synth_text))
                             fig = px.line(df) if len(df.columns) >= 2 else None
                             if fig:
                                 st.plotly_chart(fig, use_container_width=True)
@@ -1484,6 +1485,7 @@ if __name__ == "__main__":
     main()
 
 st.markdown("""
+
 <style>
 /* === FIX TEXT VISIBILITY AND PREVENT FADING === */
 body, .stApp, .stMarkdown, .sidebar-guide, .sidebar-guide li, .sidebar-guide h4,
