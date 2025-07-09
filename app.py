@@ -1283,7 +1283,7 @@ def main():
                         <div style="display: flex; align-items: flex-start; justify-content: flex-end; margin-bottom: 1rem;">
                             <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 20px; padding: 10px 15px; max-width: 70%; display: flex; align-items: center;">
                                 <div>{msg['content']}</div>
-                                <div style="margin-left: 10px; font-size: 1.5rem;">🧑‍💻</div>
+                                <div style="margin-left: 10px; font-size: 1.5rem;"></div>
                             </div>
                         </div>
                         """,
