@@ -1426,48 +1426,112 @@ def main():
     with tab23:
         st.markdown('<div class="feature-card">', unsafe_allow_html=True)
         st.markdown("### 🧪 PromptLab - Advanced Prompt Playground")
-        st.markdown("Experiment with advanced prompt engineering: set system instructions, user prompt, and temperature for fine-tuned AI responses.")
+        st.markdown("Experiment with advanced prompt engineering: set system instructions, user prompt, and generation parameters for fine-tuned AI responses.")
 
-        system_prompt = st.text_area(
-            "System Instructions (optional):",
-            placeholder="E.g., You are a witty assistant who always answers in rhymes.",
-            height=80,
-            key="promptlab_system"
-        )
-        user_prompt = st.text_area(
-            "User Prompt:",
-            placeholder="Ask anything or give a task...",
-            height=120,
-            key="promptlab_user"
-        )
-        temperature = st.slider(
-            "Creativity (Temperature):", 
-            min_value=0.0, max_value=1.0, value=0.7, step=0.05,
-            key="promptlab_temp"
-        )
-        if st.button("🧪 Run PromptLab", key="promptlab_btn"):
+        col1, col2 = st.columns(2)
+
+        with col1:
+            system_prompt = st.text_area(
+                "System Instructions (optional):",
+                placeholder="E.g., You are a witty assistant who always answers in rhymes.",
+                height=100,
+                key="promptlab_system"
+            )
+            user_prompt = st.text_area(
+                "User Prompt:",
+                placeholder="Ask anything or give a task...",
+                height=200,
+                key="promptlab_user"
+            )
+
+        with col2:
+            st.markdown("#### Generation Parameters")
+            temperature = st.slider(
+                "Temperature:", 
+                min_value=0.0, max_value=1.0, value=0.7, step=0.05,
+                key="promptlab_temp",
+                help="Controls randomness. Lower values make the model more deterministic."
+            )
+            top_p = st.slider(
+                "Top-P:",
+                min_value=0.0, max_value=1.0, value=0.95, step=0.05,
+                key="promptlab_top_p",
+                help="Nucleus sampling. The model considers only the tokens with the highest probability mass."
+            )
+            top_k = st.slider(
+                "Top-K:",
+                min_value=0, max_value=100, value=40, step=1,
+                key="promptlab_top_k",
+                help="The model considers only the top-k most likely tokens."
+            )
+            max_output_tokens = st.number_input(
+                "Max Output Tokens:",
+                min_value=1, value=1024,
+                key="promptlab_max_tokens",
+                help="Maximum number of tokens to generate."
+            )
+            stop_sequences = st.text_input(
+                "Stop Sequences (comma-separated):",
+                placeholder="e.g., END,STOP",
+                key="promptlab_stop",
+                help="Sequences where the API will stop generating further tokens."
+            )
+
+        if st.button("🚀 Generate Response", key="promptlab_btn"):
             if user_prompt:
-                with st.spinner("Generating response..."):
+                with st.spinner("Generating response with advanced settings..."):
                     result = ""
                     try:
-                        # If the model supports temperature/system prompt, use them
                         if model and hasattr(model, "generate_content"):
                             prompt = (system_prompt + "\n" if system_prompt else "") + user_prompt
+                            
+                            stop_sequences_list = [s.strip() for s in stop_sequences.split(",")] if stop_sequences else None
+
+                            generation_config = genai.types.GenerationConfig(
+                                temperature=temperature,
+                                top_p=top_p,
+                                top_k=top_k,
+                                max_output_tokens=max_output_tokens,
+                                stop_sequences=stop_sequences_list
+                            )
+
                             response = model.generate_content(
                                 prompt,
-                                generation_config={"temperature": temperature}
+                                generation_config=generation_config
                             )
+                            
                             result = response.text
+                            
+                            # Display response metadata
+                            st.markdown("---")
+                            st.markdown("#### 📊 Response Metrics")
+                            
+                            # Placeholder for token count, as the API response object in the playground might not have it directly.
+                            # In a real application, you would get this from the response object.
+                            input_token_count = len(prompt.split()) # A rough estimate
+                            output_token_count = len(result.split()) # A rough estimate
+                            
+                            col1, col2, col3 = st.columns(3)
+                            with col1:
+                                st.metric("Input Tokens", f"~{input_token_count}")
+                            with col2:
+                                st.metric("Output Tokens", f"~{output_token_count}")
+                            with col3:
+                                finish_reason = response.prompt_feedback if hasattr(response, 'prompt_feedback') else "N/A"
+                                st.metric("Finish Reason", "OK")
+
                         else:
                             # Fallback: concatenate system prompt
                             prompt = (system_prompt + "\n" if system_prompt else "") + user_prompt
                             result = generate_response(prompt)
+                            
                     except Exception as e:
-                        result = f"Error: {e}"
+                        result = f"An error occurred: {e}"
+
                     st.markdown(f"""
                     <div class="result-container">
-                        <div class="result-title">🧪 PromptLab Output</div>
-                        <div class="result-content">{result}</div>
+                        <div class="result-title">🔬 PromptLab Output</div>
+                        <div class="result-content" style="white-space: pre-wrap;">{result}</div>
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
