@@ -770,7 +770,7 @@ def main():
             <li><span class="tabicon">🛰️</span><b>SynthAI</b>: Advanced multi-task AI—combine summarization, Q&A, and visualization in one step.</li>
             <li><span class="tabicon">🧪</span><b>PromptLab</b>: Advanced prompt playground—experiment with custom instructions, system prompts, and temperature for ultimate AI control.</li>
         </ul>
-        <div style="margin-top:1.2em; color:#b0b0b0; font-size:0.93em;">
+        <div style="margin-top:1.2em; color:#b0b0b080; font-size:0.93em;">
             <b>Tip:</b> Click any icon tab above to explore its feature!
         </div>
         </div>
