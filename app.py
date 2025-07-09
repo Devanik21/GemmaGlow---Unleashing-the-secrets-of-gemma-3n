@@ -1307,7 +1307,7 @@ def main():
                     f"Continue this cosmic conversation. Respond in a cosmic, awe-inspiring way to the user's latest question.\n\n{context}"
                 )
             st.session_state["wonderwall_chat"].append({"role": "ai", "content": answer})
-            st.experimental_rerun()
+            st.rerun()
 
         st.markdown('</div>', unsafe_allow_html=True)
 
