@@ -1329,14 +1329,14 @@ def main():
             
             # Add AI response to chat history
             st.session_state["chat_history"].append({"role": "ai", "content": ai_response})
-            st.experimental_rerun()
+            st.rerun()
 
         # Clear chat button
         if st.button("Clear Chat"):
             st.session_state["chat_history"] = [
                 {"role": "ai", "content": "Hello! I'm your AI assistant. How can I help you today?"}
             ]
-            st.experimental_rerun()
+            st.rerun()
 
         st.markdown('</div>', unsafe_allow_html=True)
 
