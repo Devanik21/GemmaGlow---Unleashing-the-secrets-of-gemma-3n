@@ -1265,17 +1265,50 @@ def main():
     with tab17:
         st.markdown('<div class="feature-card">', unsafe_allow_html=True)
         st.markdown("### 🪐 WonderWall - Ask Anything Cosmic")
-        wonder_q = st.text_input("Ask your cosmic question:", placeholder="Why do we dream? What is dark matter?...", key="wonder_q")
-        if st.button("🌠 Ask the Cosmos", key="wonder_btn"):
-            if wonder_q:
-                with st.spinner("Listening to the universe..."):
-                    answer = generate_response(f"Answer this question in a cosmic, awe-inspiring way: {wonder_q}")
-                    st.markdown(f"""
-                    <div class="result-container">
-                        <div class="result-title">🪐 Cosmic Answer</div>
-                        <div class="result-content">{answer}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
+        
+        # Initialize chat history in session state
+        if "wonderwall_chat" not in st.session_state:
+            st.session_state["wonderwall_chat"] = [
+                {"role": "ai", "content": "Welcome to WonderWall! Ask your cosmic questions and I'll answer with awe and wonder."}
+            ]
+
+        # Display chat history
+        for msg in st.session_state["wonderwall_chat"]:
+            if msg["role"] == "user":
+                st.markdown(
+                    f"<div class='result-container' style='background:rgba(0,0,0,0.18);margin-bottom:0.5em;'><b>🧑 You:</b><br>{msg['content']}</div>",
+                    unsafe_allow_html=True
+                )
+            else:
+                st.markdown(
+                    f"<div class='result-container' style='background:rgba(255,255,255,0.08);margin-bottom:0.5em;'><b>🪐 Cosmic AI:</b><br>{msg['content']}</div>",
+                    unsafe_allow_html=True
+                )
+
+        # Input for new user message
+        wonder_q = st.text_input(
+            "Ask your cosmic question:",
+            placeholder="Why do we dream? What is dark matter?...",
+            key="wonder_q"
+        )
+        send_btn = st.button("🌠 Send", key="wonder_send_btn")
+
+        if send_btn and wonder_q:
+            # Append user message
+            st.session_state["wonderwall_chat"].append({"role": "user", "content": wonder_q})
+            # Build conversation context
+            context = ""
+            for msg in st.session_state["wonderwall_chat"]:
+                prefix = "User:" if msg["role"] == "user" else "AI:"
+                context += f"{prefix} {msg['content']}\n"
+            # Generate AI response
+            with st.spinner("Listening to the universe..."):
+                answer = generate_response(
+                    f"Continue this cosmic conversation. Respond in a cosmic, awe-inspiring way to the user's latest question.\n\n{context}"
+                )
+            st.session_state["wonderwall_chat"].append({"role": "ai", "content": answer})
+            st.experimental_rerun()
+
         st.markdown('</div>', unsafe_allow_html=True)
 
     # Feature 18: IdeaGenie
